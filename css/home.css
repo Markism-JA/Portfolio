@@ -51,6 +51,7 @@ nav {
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    position: relative;
 }
 
 .logo {
@@ -68,7 +69,10 @@ nav {
 .nav-links {
     display: flex;
     gap: 30px;
-    margin-left: 20px; /* Added margin to push links away from logo */
+    margin-left: 0; /* Removed the left margin */
+    position: absolute; /* Position absolute to allow centering regardless of other elements */
+    left: 50%; /* Position at the center of the parent */
+    transform: translateX(-50%); /* Shift back by half its width to center */
 }
 
 .nav-links a {
