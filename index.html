@@ -22,6 +22,7 @@
             align-items: center;
             flex-direction: column;
             transition: opacity 0.8s ease-out, visibility 0.8s;
+            overflow: hidden;
         }
         
         .preloader.hidden {
@@ -29,11 +30,49 @@
             visibility: hidden;
         }
         
+        .cursor-effect {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .cursor-glow {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(140, 82, 255, 0.15) 0%, rgba(140, 82, 255, 0.05) 40%, transparent 70%);
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            transition: width 0.3s, height 0.3s;
+        }
+        
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            border: 2px solid rgba(140, 82, 255, 0.3);
+            transform: translate(-50%, -50%) scale(0);
+            animation: ripple-effect 1.5s linear;
+            pointer-events: none;
+        }
+        
+        @keyframes ripple-effect {
+            to {
+                transform: translate(-50%, -50%) scale(3);
+                opacity: 0;
+            }
+        }
+        
         .logo-animation {
             position: relative;
             width: 100px;
             height: 100px;
             margin-bottom: 20px;
+            z-index: 1;
         }
         
         .logo-circle {
@@ -88,6 +127,7 @@
             animation: fadeUp 0.8s ease-out 0.5s forwards;
             margin-bottom: 15px;
             text-shadow: 0 0 8px rgba(140, 82, 255, 0.3);
+            z-index: 1;
         }
         
         .tagline {
@@ -99,6 +139,7 @@
             margin-bottom: 30px;
             text-align: center;
             max-width: 80%;
+            z-index: 1;
         }
         
         .enter-button {
@@ -121,6 +162,7 @@
             gap: 10px;
             position: relative;
             overflow: hidden;
+            z-index: 10;
         }
         
         .enter-button:hover {
@@ -163,6 +205,7 @@
             color: #9f9fbd;
             opacity: 0;
             animation: fadeIn 0.8s ease-out 1.5s forwards;
+            z-index: 1;
         }
         
         @keyframes spin {
@@ -199,6 +242,7 @@
             height: 4px;
             background-color: rgba(140, 82, 255, 0.4);
             border-radius: 50%;
+            pointer-events: none;
         }
         
         .main-content {
@@ -211,11 +255,30 @@
             opacity: 1;
             visibility: visible;
         }
+        
+        .star {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+            animation: twinkle 5s ease-in-out infinite;
+        }
+        
+        @keyframes twinkle {
+            0% { opacity: 0; }
+            50% { opacity: 0.7; }
+            100% { opacity: 0; }
+        }
     </style>
 </head>
 <body>
     <!-- Entry Animation / Preloader -->
     <div class="preloader">
+        <div class="cursor-effect">
+            <div class="cursor-glow"></div>
+        </div>
+        
         <div class="particles" id="particles"></div>
         
         <div class="logo-animation">
@@ -230,7 +293,7 @@
         
         <button class="enter-button" id="enterButton">
             <div class="enter-text">
-                <span>Enter Portfolio</span>
+                <span>View my work</span>
                 <i class="fas fa-arrow-right"></i>
             </div>
         </button>
@@ -267,7 +330,6 @@
                 </button>
             </header>
 
-            <!-- Rest of your content remains the same -->
             <!-- Hero Section -->
             <section class="hero">
                 <div class="hero-content">
@@ -374,6 +436,8 @@
             const preloader = document.querySelector('.preloader');
             const mainContent = document.querySelector('.main-content');
             const enterButton = document.getElementById('enterButton');
+            const cursorGlow = document.querySelector('.cursor-glow');
+            const cursorEffect = document.querySelector('.cursor-effect');
             
             // Function to enter the portfolio
             function enterPortfolio() {
@@ -391,15 +455,113 @@
                 }
             });
             
+            // Initial cursor position (center of screen)
+            let mouseX = window.innerWidth / 2;
+            let mouseY = window.innerHeight / 2;
+            cursorGlow.style.left = `${mouseX}px`;
+            cursorGlow.style.top = `${mouseY}px`;
+            
+            // Track cursor position
+            preloader.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                
+                // Move the glow effect to cursor position
+                cursorGlow.style.left = `${mouseX}px`;
+                cursorGlow.style.top = `${mouseY}px`;
+                
+                // Create ripple effect on mouse move (occasionally)
+                if (Math.random() < 0.1) { // 10% chance to create ripple on movement
+                    createRipple(mouseX, mouseY);
+                }
+                
+                // Affect nearby particles
+                const particles = document.querySelectorAll('.particle');
+                particles.forEach(particle => {
+                    const rect = particle.getBoundingClientRect();
+                    const particleX = rect.left + rect.width / 2;
+                    const particleY = rect.top + rect.height / 2;
+                    
+                    // Calculate distance between cursor and particle
+                    const dx = mouseX - particleX;
+                    const dy = mouseY - particleY;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    // If particle is within 100px of cursor, move it slightly
+                    if (distance < 100) {
+                        const angle = Math.atan2(dy, dx);
+                        const force = (100 - distance) / 10; // Stronger effect when closer
+                        
+                        // Apply slight movement away from cursor
+                        const moveX = Math.cos(angle) * force;
+                        const moveY = Math.sin(angle) * force;
+                        
+                        particle.style.transform = `translate(${-moveX}px, ${-moveY}px)`;
+                        
+                        // Increase opacity/size when close to cursor
+                        particle.style.opacity = Math.min(1, parseFloat(particle.style.opacity) + 0.2);
+                        particle.style.width = particle.style.height = `${parseFloat(particle.style.width) + 1}px`;
+                    } else {
+                        // Reset transform when not influenced
+                        particle.style.transform = '';
+                    }
+                });
+            });
+            
+            // Create ripple effect function
+            function createRipple(x, y) {
+                const ripple = document.createElement('div');
+                ripple.classList.add('ripple');
+                ripple.style.left = `${x}px`;
+                ripple.style.top = `${y}px`;
+                cursorEffect.appendChild(ripple);
+                
+                // Remove ripple after animation completes
+                setTimeout(() => {
+                    ripple.remove();
+                }, 1500);
+            }
+            
+            // Create interactive background stars
+            function createStars() {
+                const starCount = 30;
+                
+                for (let i = 0; i < starCount; i++) {
+                    const star = document.createElement('div');
+                    star.classList.add('star');
+                    
+                    // Random size between 1 and 3px
+                    const size = Math.random() * 2 + 1;
+                    star.style.width = `${size}px`;
+                    star.style.height = `${size}px`;
+                    
+                    // Random position
+                    const posX = Math.random() * 100;
+                    const posY = Math.random() * 100;
+                    star.style.left = `${posX}%`;
+                    star.style.top = `${posY}%`;
+                    
+                    // Random animation delay
+                    star.style.animationDelay = `${Math.random() * 5}s`;
+                    
+                    cursorEffect.appendChild(star);
+                }
+            }
+            
             // Create animated background particles
             const particlesContainer = document.getElementById('particles');
             const particleCount = 50;
             
-            for (let i = 0; i < particleCount; i++) {
-                createParticle();
+            // Clear existing particles if any
+            while (particlesContainer.firstChild) {
+                particlesContainer.removeChild(particlesContainer.firstChild);
             }
             
-            function createParticle() {
+            for (let i = 0; i < particleCount; i++) {
+                createEnhancedParticle();
+            }
+            
+            function createEnhancedParticle() {
                 const particle = document.createElement('div');
                 particle.classList.add('particle');
                 
@@ -409,9 +571,6 @@
                 
                 // Random size
                 const size = Math.random() * 4 + 1;
-                
-                // Random animation duration
-                const duration = Math.random() * 20 + 10;
                 
                 // Random opacity
                 const opacity = Math.random() * 0.5 + 0.1;
@@ -423,37 +582,46 @@
                 particle.style.height = `${size}px`;
                 particle.style.opacity = opacity;
                 
-                // Add animation
-                particle.style.animation = `float ${duration}s linear infinite`;
-                
-                // Add keyframe animation dynamically
-                const styleSheet = document.styleSheets[0];
-                const keyframes = `
-                    @keyframes float {
-                        0% {
-                            transform: translate(0, 0);
-                        }
-                        50% {
-                            transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px);
-                        }
-                        100% {
-                            transform: translate(0, 0);
-                        }
-                    }
-                `;
-                
-                try {
-                    styleSheet.insertRule(keyframes, styleSheet.cssRules.length);
-                } catch(e) {
-                    // Fallback for browser compatibility
-                    const head = document.head || document.getElementsByTagName('head')[0];
-                    const style = document.createElement('style');
-                    style.appendChild(document.createTextNode(keyframes));
-                    head.appendChild(style);
+                // Choose between different colors occasionally
+                if (Math.random() < 0.3) {
+                    particle.style.backgroundColor = `rgba(${140 + Math.random() * 30}, ${82 + Math.random() * 30}, 255, ${opacity})`;
                 }
+                
+                // Add floating animation
+                const duration = Math.random() * 20 + 10;
+                particle.style.transition = `transform 0.3s ease-out, opacity 0.3s ease-out, width 0.3s ease-out, height 0.3s ease-out`;
+                
+                // Start base animation
+                animateParticle(particle);
                 
                 particlesContainer.appendChild(particle);
             }
+            
+            function animateParticle(particle) {
+                // Random movement
+                const moveX = Math.random() * 100 - 50;
+                const moveY = Math.random() * 100 - 50;
+                const duration = Math.random() * 10 + 15;
+                
+                particle.animate([
+                    { transform: 'translate(0, 0)' },
+                    { transform: `translate(${moveX}px, ${moveY}px)` },
+                    { transform: 'translate(0, 0)' }
+                ], {
+                    duration: duration * 1000,
+                    iterations: Infinity
+                });
+            }
+            
+            // Initialize stars
+            createStars();
+            
+            // Add click effect for preloader background
+            preloader.addEventListener('click', (e) => {
+                if (!e.target.closest('.enter-button')) {
+                    createRipple(e.clientX, e.clientY);
+                }
+            });
         });
     </script>
 </body>
