@@ -1,29 +1,64 @@
+// Add CSS for ripple effects
+const rippleStyle = document.createElement('style');
+rippleStyle.textContent = `
+    .ripple {
+        position: absolute;
+        background: radial-gradient(circle, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0) 70%);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        opacity: 0.6;
+        animation: ripple-effect 1.5s ease-out forwards;
+        z-index: 5;
+    }
+    
+    @keyframes ripple-effect {
+        0% {
+            width: 0px;
+            height: 0px;
+            opacity: 0.8;
+        }
+        100% {
+            width: 200px;
+            height: 200px;
+            opacity: 0;
+        }
+    }
+`;
+document.head.appendChild(rippleStyle);
+
 document.addEventListener('DOMContentLoaded', function() {
   // Original mobile menu script
   const menuBtn = document.querySelector('.mobile-menu-btn');
   const navLinks = document.querySelector('.nav-links');
   
-  menuBtn.addEventListener('click', function() {
-      navLinks.classList.toggle('active');
-      // Toggle hamburger/close icon
-      const icon = menuBtn.querySelector('i');
-      if (icon.classList.contains('fa-bars')) {
-          icon.classList.remove('fa-bars');
-          icon.classList.add('fa-times');
-      } else {
-          icon.classList.remove('fa-times');
-          icon.classList.add('fa-bars');
-      }
-  });
+  if (menuBtn && navLinks) {
+    menuBtn.addEventListener('click', function() {
+        navLinks.classList.toggle('active');
+        // Toggle hamburger/close icon
+        const icon = menuBtn.querySelector('i');
+        if (icon) {
+          if (icon.classList.contains('fa-bars')) {
+              icon.classList.remove('fa-bars');
+              icon.classList.add('fa-times');
+          } else {
+              icon.classList.remove('fa-times');
+              icon.classList.add('fa-bars');
+          }
+        }
+    });
+  }
   
   // Close menu when clicking a link
   const links = document.querySelectorAll('.nav-links a');
   links.forEach(link => {
       link.addEventListener('click', function() {
-          navLinks.classList.remove('active');
-          const icon = menuBtn.querySelector('i');
-          icon.classList.remove('fa-times');
-          icon.classList.add('fa-bars');
+          if (navLinks) navLinks.classList.remove('active');
+          const icon = menuBtn?.querySelector('i');
+          if (icon) {
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+          }
       });
   });
   
@@ -34,6 +69,12 @@ document.addEventListener('DOMContentLoaded', function() {
   const cursorGlow = document.querySelector('.cursor-glow');
   const cursorEffect = document.querySelector('.cursor-effect');
   const instructionText = document.querySelector('.instruction-text');
+  
+  // Exit if necessary elements don't exist
+  if (!preloader || !mainContent || !enterButton || !cursorGlow || !cursorEffect) {
+    console.error('Required elements not found');
+    return;
+  }
   
   // Touch detection
   const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
@@ -73,6 +114,41 @@ document.addEventListener('DOMContentLoaded', function() {
   let mouseY = window.innerHeight / 2;
   cursorGlow.style.left = `${mouseX}px`;
   cursorGlow.style.top = `${mouseY}px`;
+  
+  // --- COMMON FUNCTIONS FOR BOTH DESKTOP AND MOBILE ---
+  // Create ripple effect function
+  function createRipple(x, y, isClick = false) {
+    const ripple = document.createElement('div');
+    ripple.classList.add('ripple');
+
+    // Position the ripple
+    ripple.style.left = `${x}px`;
+    ripple.style.top = `${y}px`;
+
+    // Make click ripples larger and more visible
+    if (isClick) {
+        ripple.style.width = '120px';
+        ripple.style.height = '120px';
+        ripple.style.opacity = '0.8';
+        ripple.style.animationDuration = '1.8s';
+    }
+    // Add some random variation to mousemove ripples
+    else {
+        const size = Math.random() * 30 + 70; // 70-100px
+        ripple.style.width = `${size}px`;
+        ripple.style.height = `${size}px`;
+        ripple.style.opacity = `${Math.random() * 0.3 + 0.5}`; // 0.5-0.8 opacity
+    }
+
+    cursorEffect.appendChild(ripple);
+
+    // Remove ripple after animation completes
+    setTimeout(() => {
+        if (ripple.parentNode) {
+            ripple.remove();
+        }
+    }, isClick ? 1800 : 1500);
+  }
   
   // --- TOUCHSCREEN SUPPORT ---
   if (isTouchDevice) {
@@ -173,12 +249,14 @@ document.addEventListener('DOMContentLoaded', function() {
                   
                   // Increase opacity/size when close to touch
                   particle.style.opacity = Math.min(1, 0.5 + (distance / 100));
-                  particle.style.width = particle.style.height = `${Math.min(8, parseFloat(particle.originalSize || 2) + intensity)}px`;
+                  const originalSize = parseFloat(particle.getAttribute('data-size') || 2);
+                  particle.style.width = particle.style.height = `${Math.min(8, originalSize + intensity)}px`;
               } else {
                   // Reset transform when not influenced
                   particle.style.transform = '';
-                  if (!particle.originalSize) {
-                      particle.originalSize = parseFloat(particle.style.width) || 2;
+                  const originalSize = parseFloat(particle.getAttribute('data-size') || 2);
+                  if (originalSize) {
+                      particle.style.width = particle.style.height = `${originalSize}px`;
                   }
               }
           });
@@ -201,9 +279,11 @@ document.addEventListener('DOMContentLoaded', function() {
           particles.forEach(particle => {
               setTimeout(() => {
                   particle.style.transform = '';
-                  if (particle.originalSize) {
-                      particle.style.width = particle.style.height = `${particle.originalSize}px`;
-                      particle.style.opacity = particle.originalOpacity || 0.3;
+                  const originalSize = parseFloat(particle.getAttribute('data-size') || 2);
+                  const originalOpacity = parseFloat(particle.getAttribute('data-opacity') || 0.3);
+                  if (originalSize) {
+                      particle.style.width = particle.style.height = `${originalSize}px`;
+                      particle.style.opacity = originalOpacity;
                   }
               }, Math.random() * 500);
           });
@@ -245,124 +325,108 @@ document.addEventListener('DOMContentLoaded', function() {
       // --- DESKTOP MOUSE SUPPORT ---
       // Track cursor position (mouse)
       preloader.addEventListener('mousemove', (e) => {
-          mouseX = e.clientX;
-          mouseY = e.clientY;
-          
-          // Move the glow effect to cursor position
-          cursorGlow.style.left = `${mouseX}px`;
-          cursorGlow.style.top = `${mouseY}px`;
-          
-          // Create ripple effect on mouse move (occasionally)
-          if (Math.random() < 0.1) { // 10% chance to create ripple on movement
-              createRipple(mouseX, mouseY);
-          }
-          
-          // Affect nearby particles
-          const particles = document.querySelectorAll('.particle');
-          particles.forEach(particle => {
-              const rect = particle.getBoundingClientRect();
-              const particleX = rect.left + rect.width / 2;
-              const particleY = rect.top + rect.height / 2;
-              
-              // Calculate distance between cursor and particle
-              const dx = mouseX - particleX;
-              const dy = mouseY - particleY;
-              const distance = Math.sqrt(dx * dx + dy * dy);
-              
-              // Store original size and opacity if not already stored
-              if (!particle.originalSize) {
-                  particle.originalSize = parseFloat(particle.style.width) || 2;
-                  particle.originalOpacity = parseFloat(particle.style.opacity) || 0.3;
-              }
-              
-              // If particle is within 100px of cursor, move it slightly
-              if (distance < 100) {
-                  const angle = Math.atan2(dy, dx);
-                  const force = (100 - distance) / 10; // Stronger effect when closer
-                  
-                  // Apply slight movement away from cursor
-                  const moveX = Math.cos(angle) * force;
-                  const moveY = Math.sin(angle) * force;
-                  
-                  particle.style.transform = `translate(${-moveX}px, ${-moveY}px)`;
-                  
-                  // Increase opacity/size when close to cursor
-                  particle.style.opacity = Math.min(1, parseFloat(particle.originalOpacity) + 0.2);
-                  particle.style.width = particle.style.height = `${Math.min(6, parseFloat(particle.originalSize) + 1)}px`;
-              } else {
-                  // Reset transform when not influenced
-                  particle.style.transform = '';
-                  if (particle.originalSize) {
-                      particle.style.width = particle.style.height = `${particle.originalSize}px`;
-                      particle.style.opacity = particle.originalOpacity;
-                  }
-              }
-          });
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        
+        // Move the glow effect to cursor position
+        cursorGlow.style.left = `${mouseX}px`;
+        cursorGlow.style.top = `${mouseY}px`;
+        
+        // Create ripple effect on mouse move (occasionally)
+        if (Math.random() < 0.05) { // Reduced from 0.1 to 0.05 for fewer but more noticeable ripples
+            createRipple(mouseX, mouseY);
+        }
+        
+        // Affect nearby particles
+        const particles = document.querySelectorAll('.particle');
+        particles.forEach(particle => {
+            const rect = particle.getBoundingClientRect();
+            const particleX = rect.left + rect.width / 2;
+            const particleY = rect.top + rect.height / 2;
+            
+            // Calculate distance between cursor and particle
+            const dx = mouseX - particleX;
+            const dy = mouseY - particleY;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            
+            // Store original size and opacity if not already stored
+            const originalSize = parseFloat(particle.getAttribute('data-size') || 2);
+            const originalOpacity = parseFloat(particle.getAttribute('data-opacity') || 0.3);
+            
+            // If particle is within 100px of cursor, move it slightly
+            if (distance < 100) {
+                const angle = Math.atan2(dy, dx);
+                const force = (100 - distance) / 10; // Stronger effect when closer
+                
+                // Apply slight movement away from cursor
+                const moveX = Math.cos(angle) * force;
+                const moveY = Math.sin(angle) * force;
+                
+                particle.style.transform = `translate(${-moveX}px, ${-moveY}px)`;
+                
+                // Increase opacity/size when close to cursor
+                particle.style.opacity = Math.min(1, parseFloat(originalOpacity) + 0.2);
+                particle.style.width = particle.style.height = `${Math.min(6, parseFloat(originalSize) + 1)}px`;
+            } else {
+                // Reset transform when not influenced
+                particle.style.transform = '';
+                particle.style.width = particle.style.height = `${originalSize}px`;
+                particle.style.opacity = originalOpacity;
+            }
+        });
       });
-      
+
       // Add click effect for preloader background
       preloader.addEventListener('click', (e) => {
-          if (!e.target.closest('.enter-button')) {
-              createRipple(e.clientX, e.clientY);
-          }
+        if (!e.target.closest('.enter-button')) {
+            createRipple(e.clientX, e.clientY, true); // Pass true to indicate it's a click ripple
+        }
       });
-  }
-  
-  // --- COMMON FUNCTIONS FOR BOTH DESKTOP AND MOBILE ---
-  // Create ripple effect function
-  function createRipple(x, y) {
-      const ripple = document.createElement('div');
-      ripple.classList.add('ripple');
-      ripple.style.left = `${x}px`;
-      ripple.style.top = `${y}px`;
-      cursorEffect.appendChild(ripple);
-      
-      // Remove ripple after animation completes
-      setTimeout(() => {
-          ripple.remove();
-      }, 1500);
   }
   
   // Create interactive background stars
   function createStars() {
-      const starCount = 30;
-      
-      for (let i = 0; i < starCount; i++) {
-          const star = document.createElement('div');
-          star.classList.add('star');
-          
-          // Random size between 1 and 3px
-          const size = Math.random() * 2 + 1;
-          star.style.width = `${size}px`;
-          star.style.height = `${size}px`;
-          
-          // Random position
-          const posX = Math.random() * 100;
-          const posY = Math.random() * 100;
-          star.style.left = `${posX}%`;
-          star.style.top = `${posY}%`;
-          
-          // Random animation delay
-          star.style.animationDelay = `${Math.random() * 5}s`;
-          
-          cursorEffect.appendChild(star);
-      }
+    const starCount = 30;
+
+    for (let i = 0; i < starCount; i++) {
+        const star = document.createElement('div');
+        star.classList.add('star');
+        
+        // Random size between 1 and 3px
+        const size = Math.random() * 2 + 1;
+        star.style.width = `${size}px`;
+        star.style.height = `${size}px`;
+        
+        // Random position
+        const posX = Math.random() * 100;
+        const posY = Math.random() * 100;
+        star.style.left = `${posX}%`;
+        star.style.top = `${posY}%`;
+        
+        // Random animation delay
+        star.style.animationDelay = `${Math.random() * 5}s`;
+        
+        cursorEffect.appendChild(star);
+    }
   }
   
   // Create animated background particles
   const particlesContainer = document.getElementById('particles');
-  const particleCount = 50;
   
-  // Clear existing particles if any
-  while (particlesContainer.firstChild) {
-      particlesContainer.removeChild(particlesContainer.firstChild);
+  if (particlesContainer) {
+    const particleCount = 50;
+    
+    // Clear existing particles if any
+    while (particlesContainer.firstChild) {
+        particlesContainer.removeChild(particlesContainer.firstChild);
+    }
+    
+    for (let i = 0; i < particleCount; i++) {
+        createEnhancedParticle(particlesContainer);
+    }
   }
   
-  for (let i = 0; i < particleCount; i++) {
-      createEnhancedParticle();
-  }
-  
-function createEnhancedParticle() {
+  function createEnhancedParticle(container) {
     const particle = document.createElement('div');
     particle.classList.add('particle');
     
@@ -383,9 +447,9 @@ function createEnhancedParticle() {
     particle.style.height = `${size}px`;
     particle.style.opacity = opacity;
     
-    // Store original values for animation
-    particle.originalSize = size;
-    particle.originalOpacity = opacity;
+    // Store original values as data attributes
+    particle.setAttribute('data-size', size);
+    particle.setAttribute('data-opacity', opacity);
     
     // Increase colored particles and make colors more vibrant
     if (Math.random() < 0.5) { // Increased from 0.3 to 0.5
@@ -410,10 +474,10 @@ function createEnhancedParticle() {
     // Start base animation
     animateParticle(particle);
     
-    particlesContainer.appendChild(particle);
-}
+    container.appendChild(particle);
+  }
 
-function animateParticle(particle) {
+  function animateParticle(particle) {
     // Enhanced random movement with larger range
     const moveX = Math.random() * 200 - 100; // Doubled from 100-50 to 200-100
     const moveY = Math.random() * 200 - 100; // Doubled from 100-50 to 200-100
@@ -432,51 +496,57 @@ function animateParticle(particle) {
     const keyframes = [
         { 
             transform: 'translate(0, 0) scale(1)', 
-            opacity: particle.originalOpacity 
+            opacity: parseFloat(particle.getAttribute('data-opacity')) 
         },
         { 
             transform: `translate(${moveX * 0.3}px, ${moveY * 0.5}px) scale(${pulseScale})`,
-            opacity: Math.min(1, particle.originalOpacity * 1.3),
+            opacity: Math.min(1, parseFloat(particle.getAttribute('data-opacity')) * 1.3),
             offset: 0.25
         },
         { 
             transform: `translate(${moveX}px, ${moveY}px) scale(1)`,
-            opacity: Math.max(0.2, particle.originalOpacity * 0.8),
+            opacity: Math.max(0.2, parseFloat(particle.getAttribute('data-opacity')) * 0.8),
             offset: 0.5
         },
         { 
             transform: `translate(${moveX * 0.7}px, ${moveY * 0.3}px) scale(${pulseScale * 0.8})`,
-            opacity: particle.originalOpacity,
+            opacity: parseFloat(particle.getAttribute('data-opacity')),
             offset: 0.75
         },
         { 
             transform: 'translate(0, 0) scale(1)',
-            opacity: particle.originalOpacity
+            opacity: parseFloat(particle.getAttribute('data-opacity'))
         }
     ];
     
-    // Apply the animation with easing
-    particle.animate(keyframes, {
-        duration: duration * 1000,
-        iterations: Infinity,
-        easing: 'cubic-bezier(0.4, 0, 0.6, 1)' // More dynamic easing
-    });
-    
-    // Add a secondary rotation animation for some particles
-    if (Math.random() < 0.4) {
-        const rotationAmt = Math.random() < 0.5 ? 360 : -360; // Clockwise or counter-clockwise
-        const rotationDuration = duration * 0.8; // Slightly faster than position animation
-        
-        particle.animate([
-            { transform: 'rotate(0deg)' },
-            { transform: `rotate(${rotationAmt}deg)` }
-        ], {
-            duration: rotationDuration * 1000,
-            iterations: Infinity,
-            easing: 'ease-in-out'
-        });
+    try {
+      // Apply the animation with easing
+      const animation = particle.animate(keyframes, {
+          duration: duration * 1000,
+          iterations: Infinity,
+          easing: 'cubic-bezier(0.4, 0, 0.6, 1)' // More dynamic easing
+      });
+      
+      // Add a secondary rotation animation for some particles
+      if (Math.random() < 0.4) {
+          const rotationAmt = Math.random() < 0.5 ? 360 : -360; // Clockwise or counter-clockwise
+          const rotationDuration = duration * 0.8; // Slightly faster than position animation
+          
+          particle.animate([
+              { transform: 'rotate(0deg)' },
+              { transform: `rotate(${rotationAmt}deg)` }
+          ], {
+              duration: rotationDuration * 1000,
+              iterations: Infinity,
+              easing: 'ease-in-out'
+          });
+      }
+    } catch (err) {
+      console.warn('Web Animation API not fully supported', err);
+      // Fallback for browsers without full Web Animation API support
+      particle.style.animation = `particleFloat ${duration}s infinite ease-in-out`;
     }
-}
+  }
   
   // Initialize stars
   createStars();
