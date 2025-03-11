@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- Simple dark background -->
+  <rect x="0" y="0" width="200" height="200" fill="#000000" />
+  
+  <!-- Minimalist M with sharp angles -->
+  <path d="M40 50 L40 150 L70 110 L100 150 L130 110 L160 150 L160 50" 
+        stroke="#8c52ff" 
+        stroke-width="8" 
+        stroke-linecap="square" 
+        stroke-linejoin="miter"
+        fill="none" />
+  
+  <!-- Subtle glow effect -->
+  <path d="M40 50 L40 150 L70 110 L100 150 L130 110 L160 150 L160 50" 
+        stroke="rgba(140, 82, 255, 0.25)" 
+        stroke-width="16" 
+        stroke-linecap="square" 
+        stroke-linejoin="miter"
+        fill="none" />
+</svg>

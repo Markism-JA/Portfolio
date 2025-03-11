@@ -204,6 +204,7 @@ nav {
 }
 
 .social-icons {
+    color: #ffffff;
     display: flex;
     gap: 15px;
     margin-top: 30px;
@@ -365,6 +366,15 @@ nav {
     z-index: -1;
     animation: gradientPulse 12s infinite ease-in-out;
 }
+
+.social-icon i {
+    color: white;
+  }
+  
+  .social-icon a {
+    color: white;
+    text-decoration: none;
+  }
 
 /* Subtle animation for gradient effect */
 @keyframes gradientPulse {
