@@ -134,19 +134,6 @@ nav {
     position: relative;
 }
 
-/* More subtle glow behind profile image */
-.profile-small {
-    width: 120px;
-    height: 120px;
-    border-radius: 10px;
-    margin-right: 20px;
-    object-fit: cover;
-    border: 2px solid var(--primary-color);
-    box-shadow: 0 0 12px var(--primary-glow);
-    position: relative;
-    z-index: 1;
-}
-
 .hero-intro {
     display: flex;
     align-items: center;
@@ -571,4 +558,11 @@ nav {
         width: 35px;
         height: 35px;
     }
+}
+
+h1, h2, .hero-headline, .section-title {
+    background: linear-gradient(90deg, #8c52ff, #ffffff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 10px rgba(140, 82, 255, 0.3);
 }
