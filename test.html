@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Stack Visualization</title>
+    <style>
+        :root {
+            --primary-color: #8c52ff;
+            --secondary-color: #7943e0;
+            --tertiary-color: #a370ff;
+            --background-color: #0a0a0a;
+            --card-bg: rgba(17, 17, 17, 0.8);
+            --text-color: #ffffff;
+            --text-secondary: #9f9fbd;
+            --node-size: 110px;
+            --center-node-size: 130px;
+            --connection-color: rgba(140, 82, 255, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(140, 82, 255, 0.15) 0%, transparent 30%),
+                radial-gradient(circle at 80% 30%, rgba(140, 82, 255, 0.2) 0%, transparent 35%),
+                radial-gradient(circle at 40% 80%, rgba(140, 82, 255, 0.1) 0%, transparent 30%),
+                linear-gradient(135deg, #0d0518 0%, #1a0b2e 50%, #08050f 100%);
+            background-attachment: fixed;
+            color: var(--text-color);
+            line-height: 1.6;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        header {
+            text-align: center;
+            padding: 2rem 1rem;
+            background: rgba(13, 13, 13, 0.85);
+            backdrop-filter: blur(8px);
+            color: white;
+            border-bottom: 1px solid rgba(140, 82, 255, 0.15);
+            position: relative;
+            z-index: 5;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            background: linear-gradient(90deg, #8c52ff, #a370ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 10px rgba(140, 82, 255, 0.2);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-top: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        .container {
+            padding: 1rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .tech-web {
+            position: relative;
+            width: 100%;
+            height: 650px;
+            margin: 1rem 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        canvas#connections {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .web-center {
+            position: absolute;
+            width: var(--center-node-size);
+            height: var(--center-node-size);
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 0 25px rgba(140, 82, 255, 0.3);
+            z-index: 10;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .web-center:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(140, 82, 255, 0.5);
+        }
+
+        .tech-node {
+            position: absolute;
+            width: var(--node-size);
+            height: var(--node-size);
+            border-radius: 50%;
+            background: rgba(20, 20, 25, 0.85);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(140, 82, 255, 0.25);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 15px rgba(140, 82, 255, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 5;
+        }
+
+        .tech-node:hover {
+            transform: scale(1.1);
+            border-color: rgba(140, 82, 255, 0.5);
+            box-shadow: 0 0 20px rgba(140, 82, 255, 0.3);
+        }
+
+        .tech-node img {
+            max-width: 60%;
+            max-height: 60%;
+            margin-bottom: 8px;
+        }
+
+        .node-content {
+            text-align: center;
+            font-weight: bold;
+            color: var(--text-color);
+        }
+
+        .proficiency-indicator {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: conic-gradient(
+                var(--primary-color) 0%, 
+                var(--primary-color) var(--proficiency), 
+                transparent var(--proficiency), 
+                transparent 100%
+            );
+            opacity: 0.2;
+            z-index: -1;
+        }
+
+        .node-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+
+        .detail-panel {
+            position: fixed;
+            top: 0;
+            right: -420px;
+            width: 420px;
+            height: 100%;
+            background: rgba(15, 15, 20, 0.95);
+            backdrop-filter: blur(10px);
+            border-left: 1px solid rgba(140, 82, 255, 0.2);
+            box-shadow: -5px 0 25px rgba(0, 0, 0, 0.3);
+            padding: 2rem;
+            box-sizing: border-box;
+            overflow-y: auto;
+            transition: right 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: 100;
+        }
+
+        .detail-panel.open {
+            right: 0;
+        }
+
+        .detail-close {
+            position: absolute;
+            top: 1.2rem;
+            right: 1.2rem;
+            background: rgba(140, 82, 255, 0.1);
+            border: 1px solid rgba(140, 82, 255, 0.3);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--text-color);
+            transition: all 0.2s ease;
+        }
+
+        .detail-close:hover {
+            background: rgba(140, 82, 255, 0.2);
+            border-color: var(--primary-color);
+            color: white;
+        }
+
+        .detail-title {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(90deg, #8c52ff, #a370ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 8px rgba(140, 82, 255, 0.2);
+        }
+
+        .detail-subtitle {
+            font-size: 1.2rem;
+            color: var(--tertiary-color);
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .detail-content {
+            line-height: 1.7;
+            color: var(--text-secondary);
+        }
+
+        .detail-content h3 {
+            color: var(--text-color);
+            margin: 1.8rem 0 1rem;
+            position: relative;
+            padding-left: 1rem;
+        }
+
+        .detail-content h3:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 3px;
+            background: var(--primary-color);
+            border-radius: 3px;
+        }
+
+        .progress-container {
+            margin: 2rem 0;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(140, 82, 255, 0.15);
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.8rem;
+            font-weight: 500;
+        }
+
+        .progress-percentage {
+            color: var(--tertiary-color);
+        }
+
+        .progress-bar {
+            height: 10px;
+            background-color: rgba(255, 255, 255, 0.08);
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), var(--tertiary-color));
+            border-radius: 5px;
+            transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+            box-shadow: 0 0 8px rgba(140, 82, 255, 0.3);
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            margin-bottom: 1rem;
+            position: relative;
+            padding-left: 1.8rem;
+        }
+
+        .feature-list li:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+            width: 8px;
+            height: 8px;
+            background-color: var(--tertiary-color);
+            border-radius: 50%;
+            box-shadow: 0 0 5px rgba(140, 82, 255, 0.5);
+        }
+
+        .experience-section {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            border: 1px solid rgba(140, 82, 255, 0.1);
+        }
+
+        .backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(3px);
+            z-index: 90;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .backdrop.open {
+            display: block;
+            opacity: 1;
+        }
+
+        .gradient-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 80% 10%, rgba(140, 82, 255, 0.15), transparent 40%),
+                radial-gradient(circle at 10% 40%, rgba(140, 82, 255, 0.1), transparent 30%),
+                radial-gradient(circle at 50% 90%, rgba(140, 82, 255, 0.12), transparent 40%);
+            pointer-events: none;
+            z-index: -1;
+            animation: gradientPulse 15s infinite ease-in-out;
+        }
+
+        @keyframes gradientPulse {
+            0% { opacity: 0.8; }
+            50% { opacity: 1; }
+            100% { opacity: 0.8; }
+        }
+
+        .connection-line {
+            position: absolute;
+            background-color: var(--connection-color);
+            z-index: 1;
+            transform-origin: 0 0;
+            pointer-events: none;
+        }
+
+        .node-icon {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+            color: var(--primary-color);
+        }
+
+        /* Pulsing effect on center node */
+        .pulse {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: var(--primary-color);
+            opacity: 0;
+            z-index: -1;
+            animation: pulse 3s infinite ease-out;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.3; }
+            70% { transform: scale(1.5); opacity: 0; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
+
+        /* Floating animation for nodes */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .web-center {
+            animation: float 6s infinite ease-in-out;
+        }
+
+        .tech-node:nth-child(odd) {
+            animation: float 5s infinite ease-in-out;
+        }
+
+        .tech-node:nth-child(even) {
+            animation: float 7s infinite ease-in-out;
+            animation-delay: 1.5s;
+        }
+
+        .icons-wrapper {
+            margin-top: 10px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .tech-icon {
+            width: 35px;
+            height: 35px;
+            background: rgba(140, 82, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--tertiary-color);
+            font-size: 1.2rem;
+            border: 1px solid rgba(140, 82, 255, 0.2);
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .tech-icon:hover {
+            background: rgba(140, 82, 255, 0.2);
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .tech-web {
+                height: 500px;
+            }
+            
+            :root {
+                --node-size: 90px;
+                --center-node-size: 110px;
+            }
+            
+            .detail-panel {
+                width: 100%;
+                right: -100%;
+            }
+
+            .experience-section, .progress-container {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="gradient-overlay"></div>
+    
+    <header>
+        <h1>My Technology Stack</h1>
+        <div class="subtitle">Interactive visualization of my technical expertise</div>
+    </header>
+    
+    <div class="container">
+        <div class="tech-web">
+            <canvas id="connections"></canvas>
+            
+            <div class="web-center" onclick="showDetail('my-stack')">
+                <div class="pulse"></div>
+                <div class="node-icon">⚡</div>
+                <div class="node-content">My Stack</div>
+            </div>
+            
+            <!-- The tech nodes will be created dynamically -->
+        </div>
+    </div>
+    
+    <div class="detail-panel">
+        <button class="detail-close" onclick="closeDetail()">×</button>
+        <h2 class="detail-title">Technology</h2>
+        <div class="detail-subtitle">Category</div>
+        <div class="detail-content">
+            <!-- Content will be dynamically loaded -->
+        </div>
+    </div>
+    
+    <div class="backdrop" onclick="closeDetail()"></div>
+
+    <script>
+        // Tech stack data with icons
+        const techStack = [
+            {
+                id: 'aspnet',
+                name: 'ASP.NET',
+                category: 'Backend Framework',
+                icon: '🌐',
+                description: 'ASP.NET is a web framework developed by Microsoft that enables developers to build dynamic web applications, web services, and websites.',
+                proficiency: 85,
+                features: [
+                    'Model-View-Controller (MVC) architecture',
+                    'Razor Pages for page-focused scenarios',
+                    'Web API for building HTTP services',
+                    'SignalR for real-time web functionality',
+                    'Integration with Entity Framework for data access'
+                ],
+                experience: 'I have worked extensively with ASP.NET Core to build scalable web applications with clean architecture principles. My projects include RESTful APIs, MVC applications, and Blazor web assembly solutions.',
+                position: { angle: 0, distance: 220 }
+            },
+            {
+                id: 'java',
+                name: 'Java',
+                category: 'Programming Language',
+                icon: '☕',
+                description: 'Java is a class-based, object-oriented programming language designed for stability and portability across platforms.',
+                proficiency: 75,
+                features: [
+                    'Object-oriented programming paradigm',
+                    'Platform independence through JVM',
+                    'Robust memory management with garbage collection',
+                    'Strong typing system',
+                    'Extensive standard library (Java SE)'
+                ],
+                experience: 'I have used Java for enterprise applications, implementing design patterns and developing backend services. I\'m familiar with Spring Framework and Java EE for building robust server applications.',
+                position: { angle: 72, distance: 220 }
+            },
+            {
+                id: 'csharp',
+                name: 'C#',
+                category: 'Programming Language',
+                icon: '#',
+                description: 'C# is a modern, object-oriented programming language developed by Microsoft as part of the .NET initiative.',
+                proficiency: 90,
+                features: [
+                    'Type-safe and object-oriented',
+                    'Component-oriented development',
+                    'Garbage collection for memory management',
+                    'Lambda expressions and LINQ',
+                    'Asynchronous programming with async/await'
+                ],
+                experience: 'C# is my primary language for backend development. I\'ve built numerous applications ranging from desktop apps using WPF to web services using ASP.NET Core, implementing clean architecture and SOLID principles.',
+                position: { angle: 144, distance: 220 }
+            },
+            {
+                id: 'html',
+                name: 'HTML',
+                category: 'Markup Language',
+                icon: '🖥️',
+                description: 'HTML (HyperText Markup Language) is the standard markup language for documents designed to be displayed in a web browser.',
+                proficiency: 95,
+                features: [
+                    'Semantic markup for better accessibility',
+                    'HTML5 features like Canvas and WebStorage',
+                    'Form elements for user input',
+                    'Media embedding capabilities',
+                    'Responsive design with meta tags'
+                ],
+                experience: 'I write clean, semantic HTML5 markup focusing on accessibility and SEO best practices. I ensure my HTML structure is logical, maintainable, and works across all modern browsers.',
+                position: { angle: 216, distance: 220 }
+            },
+            {
+                id: 'css',
+                name: 'CSS',
+                category: 'Styling Language',
+                icon: '🎨',
+                description: 'CSS (Cascading Style Sheets) is a stylesheet language used for describing the presentation of a document written in HTML.',
+                proficiency: 80,
+                features: [
+                    'Flexbox and Grid layout systems',
+                    'CSS animations and transitions',
+                    'Media queries for responsive design',
+                    'CSS variables for maintainable code',
+                    'CSS preprocessors (SASS/SCSS) experience'
+                ],
+                experience: 'I create responsive, accessible, and visually appealing interfaces using modern CSS techniques. I\'m experienced with CSS frameworks like Bootstrap and Tailwind, as well as writing custom CSS solutions from scratch.',
+                position: { angle: 288, distance: 220 }
+            },
+            {
+                id: 'my-stack',
+                name: 'My Technology Stack',
+                category: 'Overview',
+                icon: '⚡',
+                description: 'My technology stack encompasses a range of languages, frameworks, and tools that enable me to build full-stack applications with a focus on performance, scalability, and user experience.',
+                proficiency: null,
+                features: [
+                    'Full-stack development capabilities',
+                    'Focus on Microsoft technologies and .NET ecosystem',
+                    'Experience with both object-oriented and functional programming',
+                    'Modern frontend development with responsive design',
+                    'Database design and optimization'
+                ],
+                experience: 'With years of experience across various projects, I\'ve developed expertise in building robust web applications, RESTful APIs, and database-driven solutions. I continuously improve my skills by learning new technologies and following industry best practices.',
+                position: { angle: 0, distance: 0 }
+            }
+        ];
+
+        // Initialize the web
+        document.addEventListener('DOMContentLoaded', function() {
+            createTechWeb();
+            drawConnections();
+            
+            // Redraw connections when window is resized
+            window.addEventListener('resize', function() {
+                // Remove existing nodes
+                document.querySelectorAll('.tech-node').forEach(node => {
+                    node.remove();
+                });
+                
+                // Recreate the web
+                createTechWeb();
+                
+                // Redraw connections
+                drawConnections();
+            });
+        });
+
+        function createTechWeb() {
+            const webContainer = document.querySelector('.tech-web');
+            const centerX = webContainer.offsetWidth / 2;
+            const centerY = webContainer.offsetHeight / 2;
+
+            techStack.forEach(tech => {
+                if (tech.id === 'my-stack') return; // Skip the center node
+
+                // Calculate position using angle and distance
+                const angleInRadians = (tech.position.angle * Math.PI) / 180;
+                const x = centerX + tech.position.distance * Math.cos(angleInRadians) - (110 / 2);
+                const y = centerY + tech.position.distance * Math.sin(angleInRadians) - (110 / 2);
+
+                const techNode = document.createElement('div');
+                techNode.className = 'tech-node';
+                techNode.style.left = `${x}px`;
+                techNode.style.top = `${y}px`;
+                techNode.setAttribute('data-id', tech.id);
+                techNode.setAttribute('data-angle', tech.position.angle);
+                techNode.onclick = function() { showDetail(tech.id); };
+
+                // Create proficiency indicator
+                if (tech.proficiency) {
+                    const proficiencyIndicator = document.createElement('div');
+                    proficiencyIndicator.className = 'proficiency-indicator';
+                    proficiencyIndicator.style.setProperty('--proficiency', `${tech.proficiency}%`);
+                    techNode.appendChild(proficiencyIndicator);
+                }
+
+                // Add icon
+                const nodeIcon = document.createElement('div');
+                nodeIcon.className = 'node-icon';
+                nodeIcon.textContent = tech.icon;
+                techNode.appendChild(nodeIcon);
+                
+                // Add name
+                const nodeContent = document.createElement('div');
+                nodeContent.className = 'node-content';
+                nodeContent.textContent = tech.name;
+                techNode.appendChild(nodeContent);
+
+                // Add category label
+                const nodeLabel = document.createElement('div');
+                nodeLabel.className = 'node-label';
+                nodeLabel.textContent = tech.category;
+                techNode.appendChild(nodeLabel);
+                
+                webContainer.appendChild(techNode);
+            });
+        }
+
+        function drawConnections() {
+            const canvas = document.getElementById('connections');
+            const webContainer = document.querySelector('.tech-web');
+            const centerNode = document.querySelector('.web-center');
+            
+            // Set canvas size
+            canvas.width = webContainer.offsetWidth;
+            canvas.height = webContainer.offsetHeight;
+            
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Get center position
+            const centerRect = centerNode.getBoundingClientRect();
+            const containerRect = webContainer.getBoundingClientRect();
+            
+            const centerX = (centerRect.left + centerRect.right) / 2 - containerRect.left;
+            const centerY = (centerRect.top + centerRect.bottom) / 2 - containerRect.top;
+            
+            // Draw connections to each node
+            document.querySelectorAll('.tech-node').forEach(node => {
+                const nodeRect = node.getBoundingClientRect();
+                const nodeX = (nodeRect.left + nodeRect.right) / 2 - containerRect.left;
+                const nodeY = (nodeRect.top + nodeRect.bottom) / 2 - containerRect.top;
+                
+                // Get tech data
+                const techId = node.getAttribute('data-id');
+                const tech = techStack.find(t => t.id === techId);
+                
+                // Draw gradient line
+                ctx.beginPath();
+                
+                // Create gradient
+                const gradient = ctx.createLinearGradient(centerX, centerY, nodeX, nodeY);
+                gradient.addColorStop(0, 'rgba(140, 82, 255, 0.5)');
+                gradient.addColorStop(1, 'rgba(140, 82, 255, 0.1)');
+                
+                ctx.strokeStyle = gradient;
+                ctx.lineWidth = 2;
+                
+                // Draw line
+                ctx.moveTo(centerX, centerY);
+                ctx.lineTo(nodeX, nodeY);
+                ctx.stroke();
+                
+                // Draw small circles at connection points
+                ctx.beginPath();
+                ctx.arc(nodeX, nodeY, 3, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(140, 82, 255, 0.8)';
+                ctx.fill();
+            });
+        }
+
+        function showDetail(techId) {
+            const tech = techStack.find(t => t.id === techId);
+            if (!tech) return;
+            
+            const detailPanel = document.querySelector('.detail-panel');
+            const backdrop = document.querySelector('.backdrop');
+            const detailTitle = detailPanel.querySelector('.detail-title');
+            const detailSubtitle = detailPanel.querySelector('.detail-subtitle');
+            const detailContent = detailPanel.querySelector('.detail-content');
+            
+            detailTitle.textContent = tech.name;
+            detailSubtitle.textContent = tech.category;
+            
+            let contentHTML = `<p>${tech.description}</p>`;
+            
+            if (tech.proficiency !== null) {
+                contentHTML += `
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>Proficiency</span>
+                        <span class="progress-percentage">${tech.proficiency}%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0%"></div>
+                    </div>
+                </div>`;
+            }
+            
+            contentHTML += `<h3>Key Features</h3>
+            <ul class="feature-list">
+                ${tech.features.map(feature => `<li>${feature}</li>`).join('')}
+            </ul>
+            
+            <h3>My Experience</h3>
+            <div class="experience-section">
+                <p>${tech.experience}</p>
+            </div>
+            
+            <div class="icons-wrapper">
+                <div class="tech-icon">
+                    <i>📄</i>
+                </div>
+                <div class="tech-icon">
+                    <i>🔗</i>
+                </div>
+                <div class="tech-icon">
+                    <i>📚</i>
+                </div>
+            </div>`;
+            
+            detailContent.innerHTML = contentHTML;
+            
+            detailPanel.classList.add('open');
+            backdrop.classList.add('open');
+            
+            // Animate progress bar after panel opens
+            setTimeout(() => {
+                const progressFill = detailPanel.querySelector('.progress-fill');
+                if (progressFill) {
+                    progressFill.style.width = `${tech.proficiency}%`;
+                }
+            }, 300);
+        }
+        
+        function closeDetail() {
+            const detailPanel = document.querySelector('.detail-panel');
+            const backdrop = document.querySelector('.backdrop');
+            
+            detailPanel.classList.remove('open');
+            backdrop.classList.remove('open');
+        }
+
+        // Periodically redraw connections for better responsiveness with animations
+        setInterval(drawConnections, 2000);
+    </script>
+</body>
+</html>
