@@ -36,10 +36,12 @@ body {
   z-index: 1;
 }
 
-h1, h2, .hero-headline, .section-title {
+h1, h2, .section-title {
   background: linear-gradient(90deg, #8c52ff, #ffffff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  background-clip: text; 
+  color: transparent;
   text-shadow: 0 0 10px rgba(140, 82, 255, 0.3);
 }
 
