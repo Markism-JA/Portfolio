@@ -5,14 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mark Amarille | Software Engineer</title>
     <link rel="icon" href="res/image/logo.svg">
-    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/tech.css">
+    <link rel="stylesheet" href="css/footer.css">
 
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/entry.css">
 </head>
 <body>
-    <!-- Entry Animation / Preloader -->
+    <!-- Entry Animation / Preloader --> 
     <div class="preloader">
         <div class="cursor-effect">
             <div class="cursor-glow"></div>
@@ -54,12 +56,12 @@
                 
                 <nav>
                     <div class="nav-links">
-                        <a href="#home">Home</a>
-                        <a href="#about">About</a>
-                        <a href="#services">Services</a>
-                        <a href="#portfolio">Portfolio</a>
-                        <a href="#experience">Experience</a>
-                        <a href="#blog">Blog</a>
+                        <a href="#home" style="--item-index: 0">Home</a>
+                        <a href="#about" style="--item-index: 1">About</a>
+                        <a href="#services" style="--item-index: 2">Services</a>
+                        <a href="#portfolio" style="--item-index: 3">Portfolio</a>
+                        <a href="#experience" style="--item-index: 4">Experience</a>
+                        <a href="#blog" style="--item-index: 5">Blog</a>
                     </div>
                 </nav>
                 
@@ -181,10 +183,51 @@
                     <!-- Additional service cards would be added here -->
                 </div>
             </section>
+            
+            <!-- Tech stack -->
+             <section class="Tech-section">
 
+             </section>
             
         </div>
     </div>
+
+    <footer class="footer">
+        <!-- Back to top button -->
+        <div class="back-to-top">
+            <a href="#top" aria-label="Back to top">
+                <i class="fas fa-arrow-up"></i>
+            </a>
+        </div>
+        
+        <!-- Three-column footer layout -->
+        <div class="footer-container">
+            <div class="footer-left">
+                <div class="footer-logo">
+                    <img src="res/image/logo.svg" alt="Mark Amarille Logo">
+                </div>
+            </div>
+            
+            <div class="footer-center">
+                <div class="footer-copyright">
+                    <p>&copy; 2024 Mark Amarille</p>
+                </div>
+            </div>
+            
+            <div class="footer-right">
+                <div class="footer-social">
+                    <a href="https://github.com/Markism-JA" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/mark-amarille-b1730323b/" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://x.com/ThisIs_Markism" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/markjosephamarille/" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
     <script src="script.js"></script>
+    <!-- <script src="navigation.js"></script> -->
+
+    
 </body>
 </html>

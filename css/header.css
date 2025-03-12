@@ -1,0 +1,250 @@
+/* Header with subtle text effects */
+header {
+  padding: 20px 0;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  position: relative;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  margin-right: 40px; /* Added margin to create space between logo and navigation */
+}
+
+.logo img {
+  width: 40px;
+  height: 40px;
+  filter: drop-shadow(0 0 3px var(--primary-color));
+}
+
+.nav-links {
+  display: flex;
+  gap: 30px;
+  margin-left: 0; /* Removed the left margin */
+  position: absolute; /* Position absolute to allow centering regardless of other elements */
+  left: 50%; /* Position at the center of the parent */
+  transform: translateX(-50%); /* Shift back by half its width to center */
+}
+
+.nav-links a {
+  color: var(--text-color);
+  text-decoration: none;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  text-shadow: 0 0 5px rgba(140, 82, 255, 0.3);
+  padding: 5px 10px; /* Added padding to increase clickable area */
+}
+
+.nav-links a:hover {
+  color: var(--primary-color);
+  text-shadow: 0 0 8px var(--primary-color);
+}
+
+.contact-btn {
+  background: linear-gradient(135deg, #7943e0, #8c52ff);
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  box-shadow: 0 0 10px rgba(140, 82, 255, 0.3);
+  transition: all 0.3s ease;
+  margin-left: 20px; /* Added margin to separate from navigation links */
+}
+
+.contact-btn:hover {
+  box-shadow: 0 0 15px rgba(140, 82, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+/* Mobile header improvements */
+.mobile-menu-btn {
+  display: none;
+  background: linear-gradient(135deg, #7943e0, #8c52ff);
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 100;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 10px rgba(140, 82, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+/* Enhanced Mobile Button Hover Effect */
+.mobile-menu-btn:hover {
+  box-shadow: 0 0 18px rgba(140, 82, 255, 0.6);
+  transform: scale(1.05) rotate(1deg);
+  transition: all 0.3s ease-out;
+}
+
+/* Improved Mobile Header */
+.mobile-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 18px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-bottom: 1px solid rgba(140, 82, 255, 0.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* Enhanced Mobile Menu Styles */
+@media (max-width: 768px) {
+  .mobile-menu-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: rgba(140, 82, 255, 0.1);
+    border-radius: 8px;
+    padding: 8px;
+    transition: all 0.25s ease;
+  }
+  
+  /* Improved navigation panel with smoother animation */
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    height: 100vh;
+    width: 75%;
+    max-width: 320px;
+    background: linear-gradient(135deg, rgba(30, 30, 40, 0.97), rgba(40, 40, 55, 0.97));
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    flex-direction: column;
+    padding: 90px 32px 40px;
+    
+    /* Smoother animation */
+    transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    transform: translateX(10px);
+    opacity: 0;
+    
+    box-shadow: -8px 0 35px rgba(0, 0, 0, 0.25);
+    z-index: 99;
+    gap: 22px;
+    border-left: 1px solid rgba(140, 82, 255, 0.15);
+  }
+  
+  /* Enhanced active state animation */
+  .nav-links.active {
+    right: 0;
+    transform: translateX(0);
+    opacity: 1;
+  }
+  
+  /* Staggered animation for nav items */
+  .nav-links a {
+    font-size: 17px;
+    font-weight: 500;
+    padding: 14px 8px;
+    border-bottom: 1px solid rgba(140, 82, 255, 0.15);
+    width: 100%;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    opacity: 0;
+    transform: translateX(10px);
+    animation: fadeInRight 0.4s forwards;
+    animation-delay: calc(0.1s * var(--item-index, 0));
+  }
+  
+  @keyframes fadeInRight {
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  .nav-links a:hover {
+    padding-left: 12px;
+    color: rgba(140, 82, 255, 1);
+    border-bottom: 1px solid rgba(140, 82, 255, 0.5);
+  }
+  
+  .logo img {
+    width: 38px;
+    height: 38px;
+    transition: transform 0.3s ease;
+  }
+  
+  .logo img:hover {
+    transform: scale(1.08);
+  }
+  
+  /* Enhanced contact button */
+  .contact-btn {
+    margin: 24px 0 0;
+    width: 100%;
+    text-align: center;
+    padding: 12px 20px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, rgba(140, 82, 255, 0.9), rgba(100, 60, 200, 0.9));
+    color: white;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: none;
+    box-shadow: 0 4px 15px rgba(140, 82, 255, 0.3);
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fadeInUp 0.5s forwards;
+    animation-delay: 0.4s;
+  }
+  
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .contact-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(140, 82, 255, 0.4);
+  }
+  
+  /* Optional overlay for better focus on menu */
+  .menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s ease;
+    z-index: 98;
+  }
+  
+  .menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+}

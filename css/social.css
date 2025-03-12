@@ -1,0 +1,33 @@
+.social-icons {
+  color: #ffffff;
+  display: flex;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.social-icon {
+  width: 40px;
+  height: 40px;
+  background: rgba(17, 17, 17, 0.8);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 8px rgba(140, 82, 255, 0.2);
+}
+
+.social-icon:hover {
+  background: rgba(140, 82, 255, 0.15);
+  box-shadow: 0 0 10px rgba(140, 82, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+.social-icon i {
+  color: white;
+}
+
+.social-icon a {
+  color: white;
+  text-decoration: none;
+}

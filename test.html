@@ -34,7 +34,7 @@
             background-attachment: fixed;
             color: var(--text-color);
             line-height: 1.6;
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             overflow-x: hidden;
@@ -77,6 +77,40 @@
             margin: 0 auto;
             position: relative;
             z-index: 1;
+        }
+
+        .controls {
+            display: flex;
+            gap: 1rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .control-btn {
+            background: rgba(20, 20, 25, 0.85);
+            border: 1px solid rgba(140, 82, 255, 0.25);
+            color: var(--text-color);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            backdrop-filter: blur(5px);
+        }
+
+        .control-btn:hover {
+            border-color: var(--primary-color);
+            background: rgba(140, 82, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .control-btn.active {
+            background: linear-gradient(135deg, rgba(140, 82, 255, 0.3), rgba(140, 82, 255, 0.1));
+            border-color: var(--primary-color);
+            box-shadow: 0 0 10px rgba(140, 82, 255, 0.2);
         }
 
         .tech-web {
@@ -136,7 +170,7 @@
             align-items: center;
             box-shadow: 0 0 15px rgba(140, 82, 255, 0.2);
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
             z-index: 5;
         }
 
@@ -407,7 +441,7 @@
             50% { transform: translateY(-10px); }
             100% { transform: translateY(0px); }
         }
-
+        
         .web-center {
             animation: float 6s infinite ease-in-out;
         }
@@ -422,14 +456,15 @@
         }
 
         .icons-wrapper {
-            margin-top: 10px;
+            margin-top: 20px;
             display: flex;
-            gap: 8px;
+            gap: 12px;
+            justify-content: center;
         }
 
         .tech-icon {
-            width: 35px;
-            height: 35px;
+            width: 40px;
+            height: 40px;
             background: rgba(140, 82, 255, 0.1);
             border-radius: 50%;
             display: flex;
@@ -445,6 +480,421 @@
         .tech-icon:hover {
             background: rgba(140, 82, 255, 0.2);
             transform: scale(1.1);
+            box-shadow: 0 0 10px rgba(140, 82, 255, 0.3);
+        }
+
+        .related-techs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 1.5rem;
+        }
+
+        .related-tech {
+            background: rgba(140, 82, 255, 0.1);
+            border: 1px solid rgba(140, 82, 255, 0.15);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .related-tech:hover {
+            background: rgba(140, 82, 255, 0.2);
+            border-color: var(--primary-color);
+        }
+
+        .project-section {
+            margin-top: 1.5rem;
+        }
+
+        .project-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(140, 82, 255, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .project-title {
+            color: var(--text-color);
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .orbit-layout .tech-node {
+            transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .tech-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .stat-box {
+            flex: 1;
+            min-width: 100px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(140, 82, 255, 0.1);
+            padding: 0.8rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--tertiary-color);
+            margin-bottom: 0.3rem;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .card-layout {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .card-layout-container {
+            display: none;
+            margin-top: 1rem;
+        }
+
+        .tech-card {
+            width: 220px;
+            background: rgba(20, 20, 25, 0.85);
+            border: 1px solid rgba(140, 82, 255, 0.25);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .tech-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(140, 82, 255, 0.2);
+            border-color: var(--primary-color);
+        }
+
+        .card-proficiency {
+            width: 80px;
+            height: 80px;
+            position: relative;
+            margin-bottom: 1rem;
+        }
+
+        .card-proficiency-bg {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            position: absolute;
+        }
+
+        .card-proficiency-fill {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: conic-gradient(
+                var(--primary-color) 0%, 
+                var(--primary-color) var(--proficiency), 
+                transparent var(--proficiency), 
+                transparent 100%
+            );
+            position: absolute;
+        }
+
+        .card-proficiency-inner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(20, 20, 25, 0.95);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--tertiary-color);
+            font-weight: bold;
+        }
+
+        .card-title {
+            font-weight: bold;
+            margin-bottom: 0.3rem;
+        }
+
+        .card-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            justify-content: center;
+        }
+
+        .card-tag {
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            background: rgba(140, 82, 255, 0.15);
+            border-radius: 20px;
+            color: var(--tertiary-color);
+        }
+
+        /* Timeline view */
+        .timeline-container {
+            display: none;
+            width: 100%;
+            margin-top: 2rem;
+            position: relative;
+            padding: 0 1rem;
+        }
+
+        .timeline {
+            position: relative;
+            width: 100%;
+            height: 4px;
+            background: rgba(140, 82, 255, 0.15);
+            margin: 3rem 0;
+        }
+
+        .timeline-node {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .timeline-dot {
+            width: 16px;
+            height: 16px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            margin-bottom: 0.5rem;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(20, 20, 25, 0.85);
+        }
+
+        .timeline-node:hover .timeline-dot {
+            transform: scale(1.3);
+            box-shadow: 0 0 10px rgba(140, 82, 255, 0.5);
+        }
+
+        .timeline-year {
+            font-weight: bold;
+            margin-bottom: 0.3rem;
+        }
+
+        .timeline-label {
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .timeline-detail {
+            position: absolute;
+            width: 200px;
+            background: rgba(20, 20, 25, 0.85);
+            border: 1px solid rgba(140, 82, 255, 0.25);
+            border-radius: 8px;
+            padding: 1rem;
+            top: -120px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            z-index: 5;
+        }
+
+        .timeline-node:hover .timeline-detail {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .timeline-detail:after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 10px solid rgba(20, 20, 25, 0.85);
+        }
+
+        .animated {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Grid Layout */
+        .grid-container {
+            display: none;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            grid-gap: 1.5rem;
+            width: 100%;
+            margin-top: 2rem;
+        }
+
+        .grid-item {
+            background: rgba(20, 20, 25, 0.85);
+            border: 1px solid rgba(140, 82, 255, 0.25);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .grid-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+            box-shadow: 0 5px 15px rgba(140, 82, 255, 0.2);
+        }
+
+        .grid-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .grid-icon {
+            font-size: 2rem;
+            color: var(--primary-color);
+        }
+
+        .grid-title {
+            flex-grow: 1;
+        }
+
+        .grid-title h3 {
+            margin: 0 0 0.3rem 0;
+            font-size: 1.2rem;
+        }
+
+        .grid-subtitle {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .grid-proficiency {
+            background: rgba(255, 255, 255, 0.05);
+            height: 6px;
+            border-radius: 3px;
+            margin: 0.5rem 0 1rem;
+            overflow: hidden;
+        }
+
+        .grid-proficiency-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), var(--tertiary-color));
+            border-radius: 3px;
+            width: 0;
+            transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .grid-content {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+
+        .grid-footer {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .grid-tag {
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            background: rgba(140, 82, 255, 0.15);
+            border-radius: 20px;
+            color: var(--tertiary-color);
+        }
+
+        /* Search bar */
+        .search-container {
+            width: 100%;
+            max-width: 500px;
+            margin: 1rem auto;
+            position: relative;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 0.8rem 1.2rem 0.8rem 3rem;
+            background: rgba(20, 20, 25, 0.85);
+            border: 1px solid rgba(140, 82, 255, 0.25);
+            border-radius: 25px;
+            color: var(--text-color);
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-bar:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 10px rgba(140, 82, 255, 0.2);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+        }
+
+        /* Tooltip */
+        .tooltip {
+            position: absolute;
+            background: rgba(20, 20, 25, 0.95);
+            border: 1px solid rgba(140, 82, 255, 0.25);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            z-index: 1000;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            max-width: 250px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
         }
 
         @media (max-width: 768px) {
@@ -465,6 +915,19 @@
             .experience-section, .progress-container {
                 padding: 1rem;
             }
+            
+            .timeline-container, .grid-container {
+                padding: 0;
+            }
+            
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .controls {
+                flex-direction: column;
+                align-items: center;
+            }
         }
     </style>
 </head>
@@ -477,335 +940,825 @@
     </header>
     
     <div class="container">
+        <div class="search-container">
+            <div class="search
+            <div class="search-icon">
+                <i class="fas fa-search"></i>
+            </div>
+            <input type="text" class="search-bar" placeholder="Search technologies...">
+        </div>
+        
+        <div class="controls">
+            <button class="control-btn active" data-view="web">
+                <i class="fas fa-project-diagram"></i> Web View
+            </button>
+            <button class="control-btn" data-view="grid">
+                <i class="fas fa-th"></i> Grid View
+            </button>
+            <button class="control-btn" data-view="cards">
+                <i class="fas fa-id-card"></i> Card View
+            </button>
+            <button class="control-btn" data-view="timeline">
+                <i class="fas fa-stream"></i> Timeline
+            </button>
+        </div>
+        
         <div class="tech-web">
             <canvas id="connections"></canvas>
-            
-            <div class="web-center" onclick="showDetail('my-stack')">
+            <div class="web-center">
                 <div class="pulse"></div>
-                <div class="node-icon">⚡</div>
-                <div class="node-content">My Stack</div>
+                <span class="node-icon"><i class="fas fa-laptop-code"></i></span>
+                <div class="node-content">Core Skills</div>
             </div>
-            
-            <!-- The tech nodes will be created dynamically -->
+            <!-- Nodes will be dynamically generated with JavaScript -->
+        </div>
+        
+        <div class="grid-container">
+            <!-- Grid items will be dynamically generated with JavaScript -->
+        </div>
+        
+        <div class="card-layout-container">
+            <div class="card-layout">
+                <!-- Cards will be dynamically generated with JavaScript -->
+            </div>
+        </div>
+        
+        <div class="timeline-container">
+            <div class="timeline">
+                <!-- Timeline nodes will be dynamically generated with JavaScript -->
+            </div>
         </div>
     </div>
     
     <div class="detail-panel">
-        <button class="detail-close" onclick="closeDetail()">×</button>
-        <h2 class="detail-title">Technology</h2>
+        <div class="detail-close"><i class="fas fa-times"></i></div>
+        <h2 class="detail-title">Technology Name</h2>
         <div class="detail-subtitle">Category</div>
+        
+        <div class="progress-container">
+            <div class="progress-label">
+                <span>Proficiency Level</span>
+                <span class="progress-percentage">85%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 85%;"></div>
+            </div>
+        </div>
+        
+        <div class="tech-stats">
+            <div class="stat-box">
+                <div class="stat-value">4+</div>
+                <div class="stat-label">Years Experience</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-value">12</div>
+                <div class="stat-label">Projects</div>
+            </div>
+        </div>
+        
         <div class="detail-content">
-            <!-- Content will be dynamically loaded -->
+            <h3>Overview</h3>
+            <p>Detailed description about the technology and my experience with it.</p>
+            
+            <h3>Key Features</h3>
+            <ul class="feature-list">
+                <li>Feature one description</li>
+                <li>Feature two description</li>
+                <li>Feature three description</li>
+            </ul>
+            
+            <h3>Related Technologies</h3>
+            <div class="related-techs">
+                <div class="related-tech">Related Tech 1</div>
+                <div class="related-tech">Related Tech 2</div>
+                <div class="related-tech">Related Tech 3</div>
+            </div>
+            
+            <h3>Projects</h3>
+            <div class="project-section">
+                <div class="project-item">
+                    <div class="project-title">Project Name</div>
+                    <p>Brief description of the project and how this technology was used.</p>
+                </div>
+            </div>
         </div>
     </div>
     
-    <div class="backdrop" onclick="closeDetail()"></div>
-
+    <div class="backdrop"></div>
+    <div class="tooltip"></div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
     <script>
-        // Tech stack data with icons
-        const techStack = [
+        // Tech data structure
+        const techData = [
             {
-                id: 'aspnet',
-                name: 'ASP.NET',
-                category: 'Backend Framework',
-                icon: '🌐',
-                description: 'ASP.NET is a web framework developed by Microsoft that enables developers to build dynamic web applications, web services, and websites.',
-                proficiency: 85,
-                features: [
-                    'Model-View-Controller (MVC) architecture',
-                    'Razor Pages for page-focused scenarios',
-                    'Web API for building HTTP services',
-                    'SignalR for real-time web functionality',
-                    'Integration with Entity Framework for data access'
-                ],
-                experience: 'I have worked extensively with ASP.NET Core to build scalable web applications with clean architecture principles. My projects include RESTful APIs, MVC applications, and Blazor web assembly solutions.',
-                position: { angle: 0, distance: 220 }
-            },
-            {
-                id: 'java',
-                name: 'Java',
-                category: 'Programming Language',
-                icon: '☕',
-                description: 'Java is a class-based, object-oriented programming language designed for stability and portability across platforms.',
-                proficiency: 75,
-                features: [
-                    'Object-oriented programming paradigm',
-                    'Platform independence through JVM',
-                    'Robust memory management with garbage collection',
-                    'Strong typing system',
-                    'Extensive standard library (Java SE)'
-                ],
-                experience: 'I have used Java for enterprise applications, implementing design patterns and developing backend services. I\'m familiar with Spring Framework and Java EE for building robust server applications.',
-                position: { angle: 72, distance: 220 }
-            },
-            {
-                id: 'csharp',
-                name: 'C#',
-                category: 'Programming Language',
-                icon: '#',
-                description: 'C# is a modern, object-oriented programming language developed by Microsoft as part of the .NET initiative.',
+                id: 'js',
+                name: 'JavaScript',
+                category: 'Frontend',
                 proficiency: 90,
+                yearsExperience: 5,
+                projects: 20,
+                description: 'Core language for web development with strong expertise in modern ES6+ features.',
                 features: [
-                    'Type-safe and object-oriented',
-                    'Component-oriented development',
-                    'Garbage collection for memory management',
-                    'Lambda expressions and LINQ',
-                    'Asynchronous programming with async/await'
+                    'Modern ES6+ syntax and features',
+                    'Asynchronous programming with Promises and async/await',
+                    'Functional programming patterns',
+                    'DOM manipulation and event handling'
                 ],
-                experience: 'C# is my primary language for backend development. I\'ve built numerous applications ranging from desktop apps using WPF to web services using ASP.NET Core, implementing clean architecture and SOLID principles.',
-                position: { angle: 144, distance: 220 }
+                relatedTechs: ['TypeScript', 'React', 'Node.js', 'Vue.js'],
+                projects: [
+                    {
+                        name: 'E-commerce Platform',
+                        description: 'Built a fully responsive e-commerce site with cart functionality and payment processing.'
+                    },
+                    {
+                        name: 'Interactive Dashboard',
+                        description: 'Created a real-time analytics dashboard with charts and filters.'
+                    }
+                ],
+                yearStarted: 2018
             },
             {
-                id: 'html',
-                name: 'HTML',
-                category: 'Markup Language',
-                icon: '🖥️',
-                description: 'HTML (HyperText Markup Language) is the standard markup language for documents designed to be displayed in a web browser.',
-                proficiency: 95,
+                id: 'react',
+                name: 'React',
+                category: 'Frontend',
+                proficiency: 85,
+                yearsExperience: 4,
+                projects: 15,
+                description: 'Frontend library for building user interfaces with a component-based architecture.',
                 features: [
-                    'Semantic markup for better accessibility',
-                    'HTML5 features like Canvas and WebStorage',
-                    'Form elements for user input',
-                    'Media embedding capabilities',
-                    'Responsive design with meta tags'
+                    'Component lifecycle and hooks',
+                    'State management with Redux and Context API',
+                    'Router implementation',
+                    'Performance optimization techniques'
                 ],
-                experience: 'I write clean, semantic HTML5 markup focusing on accessibility and SEO best practices. I ensure my HTML structure is logical, maintainable, and works across all modern browsers.',
-                position: { angle: 216, distance: 220 }
+                relatedTechs: ['JavaScript', 'Redux', 'Next.js', 'React Native'],
+                projects: [
+                    {
+                        name: 'Social Media App',
+                        description: 'Developed a social media platform with real-time updates and infinite scrolling.'
+                    }
+                ],
+                yearStarted: 2019
+            },
+            {
+                id: 'node',
+                name: 'Node.js',
+                category: 'Backend',
+                proficiency: 80,
+                yearsExperience: 4,
+                projects: 12,
+                description: 'JavaScript runtime for building scalable server-side applications.',
+                features: [
+                    'RESTful API development',
+                    'Express framework implementation',
+                    'Authentication and authorization',
+                    'Database integration'
+                ],
+                relatedTechs: ['Express', 'MongoDB', 'JavaScript', 'REST API'],
+                projects: [
+                    {
+                        name: 'Task Management API',
+                        description: 'Created a RESTful API for task management with user authentication.'
+                    }
+                ],
+                yearStarted: 2019
+            },
+            {
+                id: 'python',
+                name: 'Python',
+                category: 'Backend',
+                proficiency: 75,
+                yearsExperience: 3,
+                projects: 8,
+                description: 'Versatile language used for web development, data analysis, and automation.',
+                features: [
+                    'Web development with Django and Flask',
+                    'Data analysis with Pandas and NumPy',
+                    'API integration',
+                    'Automation scripts'
+                ],
+                relatedTechs: ['Django', 'Flask', 'Pandas', 'NumPy'],
+                projects: [
+                    {
+                        name: 'Data Analysis Tool',
+                        description: 'Built a tool for analyzing and visualizing large datasets.'
+                    }
+                ],
+                yearStarted: 2020
             },
             {
                 id: 'css',
-                name: 'CSS',
-                category: 'Styling Language',
-                icon: '🎨',
-                description: 'CSS (Cascading Style Sheets) is a stylesheet language used for describing the presentation of a document written in HTML.',
-                proficiency: 80,
+                name: 'CSS/SCSS',
+                category: 'Frontend',
+                proficiency: 85,
+                yearsExperience: 5,
+                projects: 25,
+                description: 'Styling languages for creating responsive and attractive web interfaces.',
                 features: [
-                    'Flexbox and Grid layout systems',
+                    'Responsive design with Flexbox and Grid',
                     'CSS animations and transitions',
-                    'Media queries for responsive design',
-                    'CSS variables for maintainable code',
-                    'CSS preprocessors (SASS/SCSS) experience'
+                    'SCSS variables and mixins',
+                    'Cross-browser compatibility'
                 ],
-                experience: 'I create responsive, accessible, and visually appealing interfaces using modern CSS techniques. I\'m experienced with CSS frameworks like Bootstrap and Tailwind, as well as writing custom CSS solutions from scratch.',
-                position: { angle: 288, distance: 220 }
+                relatedTechs: ['HTML', 'Tailwind CSS', 'Bootstrap', 'UI Design'],
+                projects: [
+                    {
+                        name: 'Portfolio Website',
+                        description: 'Designed and developed a personal portfolio with custom animations.'
+                    }
+                ],
+                yearStarted: 2018
             },
             {
-                id: 'my-stack',
-                name: 'My Technology Stack',
-                category: 'Overview',
-                icon: '⚡',
-                description: 'My technology stack encompasses a range of languages, frameworks, and tools that enable me to build full-stack applications with a focus on performance, scalability, and user experience.',
-                proficiency: null,
+                id: 'typescript',
+                name: 'TypeScript',
+                category: 'Frontend',
+                proficiency: 80,
+                yearsExperience: 3,
+                projects: 10,
+                description: 'Strongly typed programming language that builds on JavaScript for safer code.',
                 features: [
-                    'Full-stack development capabilities',
-                    'Focus on Microsoft technologies and .NET ecosystem',
-                    'Experience with both object-oriented and functional programming',
-                    'Modern frontend development with responsive design',
-                    'Database design and optimization'
+                    'Static type checking',
+                    'Interface definitions',
+                    'Advanced object-oriented features',
+                    'Integration with React and Node.js'
                 ],
-                experience: 'With years of experience across various projects, I\'ve developed expertise in building robust web applications, RESTful APIs, and database-driven solutions. I continuously improve my skills by learning new technologies and following industry best practices.',
-                position: { angle: 0, distance: 0 }
+                relatedTechs: ['JavaScript', 'React', 'Angular', 'Node.js'],
+                projects: [
+                    {
+                        name: 'Healthcare Dashboard',
+                        description: 'Built a TypeScript-based application for healthcare data management.'
+                    }
+                ],
+                yearStarted: 2020
+            },
+            {
+                id: 'sql',
+                name: 'SQL',
+                category: 'Database',
+                proficiency: 75,
+                yearsExperience: 4,
+                projects: 15,
+                description: 'Query language for managing and manipulating relational databases.',
+                features: [
+                    'Complex query writing',
+                    'Database design and normalization',
+                    'Performance optimization',
+                    'Experience with MySQL and PostgreSQL'
+                ],
+                relatedTechs: ['MySQL', 'PostgreSQL', 'Database Design', 'ORM'],
+                projects: [
+                    {
+                        name: 'Inventory Management System',
+                        description: 'Designed database schema and queries for an inventory tracking system.'
+                    }
+                ],
+                yearStarted: 2019
+            },
+            {
+                id: 'mongodb',
+                name: 'MongoDB',
+                category: 'Database',
+                proficiency: 70,
+                yearsExperience: 3,
+                projects: 8,
+                description: 'NoSQL database for storing flexible, JSON-like documents.',
+                features: [
+                    'Schema design for document databases',
+                    'CRUD operations',
+                    'Aggregation pipelines',
+                    'Integration with Node.js using Mongoose'
+                ],
+                relatedTechs: ['NoSQL', 'Mongoose', 'Node.js', 'Express'],
+                projects: [
+                    {
+                        name: 'Content Management System',
+                        description: 'Developed a CMS with MongoDB for flexible content storage.'
+                    }
+                ],
+                yearStarted: 2020
             }
         ];
 
-        // Initialize the web
-        document.addEventListener('DOMContentLoaded', function() {
-            createTechWeb();
-            drawConnections();
-            
-            // Redraw connections when window is resized
-            window.addEventListener('resize', function() {
-                // Remove existing nodes
-                document.querySelectorAll('.tech-node').forEach(node => {
-                    node.remove();
-                });
-                
-                // Recreate the web
-                createTechWeb();
-                
-                // Redraw connections
-                drawConnections();
-            });
-        });
-
-        function createTechWeb() {
-            const webContainer = document.querySelector('.tech-web');
-            const centerX = webContainer.offsetWidth / 2;
-            const centerY = webContainer.offsetHeight / 2;
-
-            techStack.forEach(tech => {
-                if (tech.id === 'my-stack') return; // Skip the center node
-
-                // Calculate position using angle and distance
-                const angleInRadians = (tech.position.angle * Math.PI) / 180;
-                const x = centerX + tech.position.distance * Math.cos(angleInRadians) - (110 / 2);
-                const y = centerY + tech.position.distance * Math.sin(angleInRadians) - (110 / 2);
-
-                const techNode = document.createElement('div');
-                techNode.className = 'tech-node';
-                techNode.style.left = `${x}px`;
-                techNode.style.top = `${y}px`;
-                techNode.setAttribute('data-id', tech.id);
-                techNode.setAttribute('data-angle', tech.position.angle);
-                techNode.onclick = function() { showDetail(tech.id); };
-
-                // Create proficiency indicator
-                if (tech.proficiency) {
-                    const proficiencyIndicator = document.createElement('div');
-                    proficiencyIndicator.className = 'proficiency-indicator';
-                    proficiencyIndicator.style.setProperty('--proficiency', `${tech.proficiency}%`);
-                    techNode.appendChild(proficiencyIndicator);
-                }
-
-                // Add icon
-                const nodeIcon = document.createElement('div');
-                nodeIcon.className = 'node-icon';
-                nodeIcon.textContent = tech.icon;
-                techNode.appendChild(nodeIcon);
-                
-                // Add name
-                const nodeContent = document.createElement('div');
-                nodeContent.className = 'node-content';
-                nodeContent.textContent = tech.name;
-                techNode.appendChild(nodeContent);
-
-                // Add category label
-                const nodeLabel = document.createElement('div');
-                nodeLabel.className = 'node-label';
-                nodeLabel.textContent = tech.category;
-                techNode.appendChild(nodeLabel);
-                
-                webContainer.appendChild(techNode);
-            });
+        // Web layout positions calculation
+        function calculateNodePositions(centerX, centerY, radius, count) {
+            const positions = [];
+            for (let i = 0; i < count; i++) {
+                const angle = (i * 2 * Math.PI / count) - Math.PI / 2;
+                const x = centerX + radius * Math.cos(angle);
+                const y = centerY + radius * Math.sin(angle);
+                positions.push({ x, y, angle });
+            }
+            return positions;
         }
 
-        function drawConnections() {
-            const canvas = document.getElementById('connections');
+        // Initialize the visualization
+        function initVisualization() {
             const webContainer = document.querySelector('.tech-web');
             const centerNode = document.querySelector('.web-center');
+            const webCenterX = webContainer.offsetWidth / 2;
+            const webCenterY = webContainer.offsetHeight / 2;
             
-            // Set canvas size
+            // Calculate positions for nodes in a circle around the center
+            const nodePositions = calculateNodePositions(webCenterX, webCenterY, webContainer.offsetWidth * 0.3, techData.length);
+            
+            // Create tech nodes
+            techData.forEach((tech, index) => {
+                const node = document.createElement('div');
+                node.className = 'tech-node';
+                node.setAttribute('data-id', tech.id);
+                node.style.left = `${nodePositions[index].x - 55}px`;
+                node.style.top = `${nodePositions[index].y - 55}px`;
+                
+                const profIndicator = document.createElement('div');
+                profIndicator.className = 'proficiency-indicator';
+                profIndicator.style.setProperty('--proficiency', `${tech.proficiency}%`);
+                
+                const icon = document.createElement('span');
+                icon.className = 'node-icon';
+                icon.innerHTML = `<i class="fas fa-code"></i>`;
+                
+                const content = document.createElement('div');
+                content.className = 'node-content';
+                content.textContent = tech.name;
+                
+                node.appendChild(profIndicator);
+                node.appendChild(icon);
+                node.appendChild(content);
+                
+                webContainer.appendChild(node);
+                
+                // Add event listener for node click
+                node.addEventListener('click', () => showTechDetails(tech));
+            });
+            
+            // Initialize canvas for connections
+            const canvas = document.getElementById('connections');
             canvas.width = webContainer.offsetWidth;
             canvas.height = webContainer.offsetHeight;
+            drawConnections(canvas, centerNode, document.querySelectorAll('.tech-node'));
             
+            // Center node click event
+            centerNode.addEventListener('click', showAllTechs);
+            
+            // Initialize other views
+            initGridView();
+            initCardView();
+            initTimelineView();
+            
+            // View switching controls
+            document.querySelectorAll('.control-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.control-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    
+                    const view = btn.getAttribute('data-view');
+                    toggleView(view);
+                });
+            });
+            
+            // Close detail panel
+            document.querySelector('.detail-close').addEventListener('click', () => {
+                document.querySelector('.detail-panel').classList.remove('open');
+                document.querySelector('.backdrop').classList.remove('open');
+            });
+            
+            // Backdrop click to close detail panel
+            document.querySelector('.backdrop').addEventListener('click', () => {
+                document.querySelector('.detail-panel').classList.remove('open');
+                document.querySelector('.backdrop').classList.remove('open');
+            });
+            
+            // Search functionality
+            const searchBar = document.querySelector('.search-bar');
+            searchBar.addEventListener('input', () => {
+                const searchTerm = searchBar.value.toLowerCase();
+                filterTechnologies(searchTerm);
+            });
+        }
+        
+        // Draw connections between nodes
+        function drawConnections(canvas, centerNode, techNodes) {
             const ctx = canvas.getContext('2d');
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             
-            // Get center position
             const centerRect = centerNode.getBoundingClientRect();
-            const containerRect = webContainer.getBoundingClientRect();
+            const containerRect = canvas.parentElement.getBoundingClientRect();
             
-            const centerX = (centerRect.left + centerRect.right) / 2 - containerRect.left;
-            const centerY = (centerRect.top + centerRect.bottom) / 2 - containerRect.top;
+            const centerX = centerRect.left + centerRect.width / 2 - containerRect.left;
+            const centerY = centerRect.top + centerRect.height / 2 - containerRect.top;
             
-            // Draw connections to each node
-            document.querySelectorAll('.tech-node').forEach(node => {
+            techNodes.forEach(node => {
                 const nodeRect = node.getBoundingClientRect();
-                const nodeX = (nodeRect.left + nodeRect.right) / 2 - containerRect.left;
-                const nodeY = (nodeRect.top + nodeRect.bottom) / 2 - containerRect.top;
+                const nodeX = nodeRect.left + nodeRect.width / 2 - containerRect.left;
+                const nodeY = nodeRect.top + nodeRect.height / 2 - containerRect.top;
                 
-                // Get tech data
-                const techId = node.getAttribute('data-id');
-                const tech = techStack.find(t => t.id === techId);
-                
-                // Draw gradient line
                 ctx.beginPath();
-                
-                // Create gradient
-                const gradient = ctx.createLinearGradient(centerX, centerY, nodeX, nodeY);
-                gradient.addColorStop(0, 'rgba(140, 82, 255, 0.5)');
-                gradient.addColorStop(1, 'rgba(140, 82, 255, 0.1)');
-                
-                ctx.strokeStyle = gradient;
-                ctx.lineWidth = 2;
-                
-                // Draw line
                 ctx.moveTo(centerX, centerY);
                 ctx.lineTo(nodeX, nodeY);
+                ctx.strokeStyle = 'rgba(140, 82, 255, 0.2)';
+                ctx.lineWidth = 2;
                 ctx.stroke();
-                
-                // Draw small circles at connection points
-                ctx.beginPath();
-                ctx.arc(nodeX, nodeY, 3, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(140, 82, 255, 0.8)';
-                ctx.fill();
             });
         }
-
-        function showDetail(techId) {
-            const tech = techStack.find(t => t.id === techId);
-            if (!tech) return;
-            
-            const detailPanel = document.querySelector('.detail-panel');
+        
+        // Show tech details in panel
+        function showTechDetails(tech) {
+            const panel = document.querySelector('.detail-panel');
             const backdrop = document.querySelector('.backdrop');
-            const detailTitle = detailPanel.querySelector('.detail-title');
-            const detailSubtitle = detailPanel.querySelector('.detail-subtitle');
-            const detailContent = detailPanel.querySelector('.detail-content');
             
-            detailTitle.textContent = tech.name;
-            detailSubtitle.textContent = tech.category;
+            // Update panel content
+            panel.querySelector('.detail-title').textContent = tech.name;
+            panel.querySelector('.detail-subtitle').textContent = tech.category;
+            panel.querySelector('.progress-percentage').textContent = `${tech.proficiency}%`;
+            panel.querySelector('.progress-fill').style.width = `${tech.proficiency}%`;
             
-            let contentHTML = `<p>${tech.description}</p>`;
+            // Update stats
+            panel.querySelector('.stat-value:first-child').textContent = `${tech.yearsExperience}+`;
+            panel.querySelector('.stat-value:last-child').textContent = tech.projects;
             
-            if (tech.proficiency !== null) {
-                contentHTML += `
-                <div class="progress-container">
-                    <div class="progress-label">
-                        <span>Proficiency</span>
-                        <span class="progress-percentage">${tech.proficiency}%</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 0%"></div>
-                    </div>
-                </div>`;
-            }
+            // Update content sections
+            const content = panel.querySelector('.detail-content');
             
-            contentHTML += `<h3>Key Features</h3>
-            <ul class="feature-list">
-                ${tech.features.map(feature => `<li>${feature}</li>`).join('')}
-            </ul>
+            // Overview
+            content.querySelector('p').textContent = tech.description;
             
-            <h3>My Experience</h3>
-            <div class="experience-section">
-                <p>${tech.experience}</p>
-            </div>
+            // Features
+            const featureList = content.querySelector('.feature-list');
+            featureList.innerHTML = '';
+            tech.features.forEach(feature => {
+                const li = document.createElement('li');
+                li.textContent = feature;
+                featureList.appendChild(li);
+            });
             
-            <div class="icons-wrapper">
-                <div class="tech-icon">
-                    <i>📄</i>
-                </div>
-                <div class="tech-icon">
-                    <i>🔗</i>
-                </div>
-                <div class="tech-icon">
-                    <i>📚</i>
-                </div>
-            </div>`;
+            // Related techs
+            const relatedTechs = content.querySelector('.related-techs');
+            relatedTechs.innerHTML = '';
+            tech.relatedTechs.forEach(relTech => {
+                const div = document.createElement('div');
+                div.className = 'related-tech';
+                div.textContent = relTech;
+                relatedTechs.appendChild(div);
+            });
             
-            detailContent.innerHTML = contentHTML;
+            // Projects
+            const projectSection = content.querySelector('.project-section');
+            projectSection.innerHTML = '';
+            tech.projects.forEach(project => {
+                const div = document.createElement('div');
+                div.className = 'project-item';
+                
+                const title = document.createElement('div');
+                title.className = 'project-title';
+                title.textContent = project.name;
+                
+                const desc = document.createElement('p');
+                desc.textContent = project.description;
+                
+                div.appendChild(title);
+                div.appendChild(desc);
+                projectSection.appendChild(div);
+            });
             
-            detailPanel.classList.add('open');
+            // Show panel
+            panel.classList.add('open');
             backdrop.classList.add('open');
-            
-            // Animate progress bar after panel opens
-            setTimeout(() => {
-                const progressFill = detailPanel.querySelector('.progress-fill');
-                if (progressFill) {
-                    progressFill.style.width = `${tech.proficiency}%`;
-                }
-            }, 300);
         }
         
-        function closeDetail() {
-            const detailPanel = document.querySelector('.detail-panel');
+        // Initialize grid view
+        function initGridView() {
+            const gridContainer = document.querySelector('.grid-container');
+            
+            techData.forEach(tech => {
+                const gridItem = document.createElement('div');
+                gridItem.className = 'grid-item';
+                gridItem.setAttribute('data-id', tech.id);
+                
+                const header = document.createElement('div');
+                header.className = 'grid-header';
+                
+                const icon = document.createElement('div');
+                icon.className = 'grid-icon';
+                icon.innerHTML = '<i class="fas fa-code"></i>';
+                
+                const title = document.createElement('div');
+                title.className = 'grid-title';
+                
+                const h3 = document.createElement('h3');
+                h3.textContent = tech.name;
+                
+                const subtitle = document.createElement('div');
+                subtitle.className = 'grid-subtitle';
+                subtitle.textContent = tech.category;
+                
+                title.appendChild(h3);
+                title.appendChild(subtitle);
+                
+                header.appendChild(icon);
+                header.appendChild(title);
+                
+                const proficiency = document.createElement('div');
+                proficiency.className = 'grid-proficiency';
+                
+                const profBar = document.createElement('div');
+                profBar.className = 'grid-proficiency-bar';
+                profBar.style.width = `${tech.proficiency}%`;
+                
+                proficiency.appendChild(profBar);
+                
+                const content = document.createElement('div');
+                content.className = 'grid-content';
+                content.textContent = tech.description;
+                
+                const footer = document.createElement('div');
+                footer.className = 'grid-footer';
+                
+                tech.relatedTechs.slice(0, 3).forEach(relTech => {
+                    const tag = document.createElement('div');
+                    tag.className = 'grid-tag';
+                    tag.textContent = relTech;
+                    footer.appendChild(tag);
+                });
+                
+                gridItem.appendChild(header);
+                gridItem.appendChild(proficiency);
+                gridItem.appendChild(content);
+                gridItem.appendChild(footer);
+                
+                gridContainer.appendChild(gridItem);
+                
+                // Add click event
+                gridItem.addEventListener('click', () => showTechDetails(tech));
+            });
+        }
+        
+        // Initialize card view
+        function initCardView() {
+            const cardLayout = document.querySelector('.card-layout');
+            
+            techData.forEach(tech => {
+                const card = document.createElement('div');
+                card.className = 'tech-card';
+                card.setAttribute('data-id', tech.id);
+                
+                const proficiency = document.createElement('div');
+                proficiency.className = 'card-proficiency';
+                
+                const profBg = document.createElement('div');
+                profBg.className = 'card-proficiency-bg';
+                
+                const profFill = document.createElement('div');
+                profFill.className = 'card-proficiency-fill';
+                profFill.style.setProperty('--proficiency', `${tech.proficiency}%`);
+                
+                const profInner = document.createElement('div');
+                profInner.className = 'card-proficiency-inner';
+                profInner.textContent = `${tech.proficiency}%`;
+                
+                proficiency.appendChild(profBg);
+                proficiency.appendChild(profFill);
+                proficiency.appendChild(profInner);
+                
+                const title = document.createElement('div');
+                title.className = 'card-title';
+                title.textContent = tech.name;
+                
+                const subtitle = document.createElement('div');
+                subtitle.className = 'card-subtitle';
+                subtitle.textContent = `${tech.yearsExperience}+ years`;
+                
+                const tags = document.createElement('div');
+                tags.className = 'card-tags';
+                
+                tech.relatedTechs.slice(0, 3).forEach(relTech => {
+                    const tag = document.createElement('div');
+                    tag.className = 'card-tag';
+                    tag.textContent = relTech;
+                    tags.appendChild(tag);
+                });
+                
+                card.appendChild(proficiency);
+                card.appendChild(title);
+                card.appendChild(subtitle);
+                card.appendChild(tags);
+                
+                cardLayout.appendChild(card);
+                
+                // Add click event
+                card.addEventListener('click', () => showTechDetails(tech));
+            });
+        }
+        
+        // Initialize timeline view
+        function initTimelineView() {
+            const timeline = document.querySelector('.timeline');
+            
+            // Sort tech data by year started
+            const sortedTech = [...techData].sort((a, b) => a.yearStarted - b.yearStarted);
+            
+            const startYear = sortedTech[0].yearStarted;
+            const endYear = new Date().getFullYear();
+            const timelineWidth = timeline.offsetWidth - 100;
+            
+            sortedTech.forEach(tech => {
+                const yearPos = (tech.yearStarted - startYear) / (endYear - startYear);
+                const position = yearPos * timelineWidth + 50;
+                
+                const node = document.createElement('div');
+                node.className = 'timeline-node';
+                node.style.left = `${position}px`;
+                
+                const dot = document.createElement('div');
+                dot.className = 'timeline-dot';
+                
+                const year = document.createElement('div');
+                year.className = 'timeline-year';
+                year.textContent = tech.yearStarted;
+                
+                const label = document.createElement('div');
+                label.className = 'timeline-label';
+                label.textContent = tech.name;
+                
+                const detail = document.createElement('div');
+                detail.className = 'timeline-detail';
+                detail.innerHTML = `
+                    <strong>${tech.name}</strong><br>
+                    ${tech.category}<br>
+                    Proficiency: ${tech.proficiency}%<br>
+                    Experience: ${tech.yearsExperience}+ years
+                `;
+                
+                node.appendChild(dot);
+                node.appendChild(year);
+                node.appendChild(label);
+                node.appendChild(detail);
+                
+                timeline.appendChild(node);
+                
+                // Add click event
+                node.addEventListener('click', () => showTechDetails(tech));
+            });
+        }
+        
+        // Toggle between different views
+        function toggleView(viewName) {
+            const webView = document.querySelector('.tech-web');
+            const gridView = document.querySelector('.grid-container');
+            const cardView = document.querySelector('.card-layout-container');
+            const timelineView = document.querySelector('.timeline-container');
+            
+            webView.style.display = 'none';
+            gridView.style.display = 'none';
+            cardView.style.display = 'none';
+            timelineView.style.display = 'none';
+            
+            switch(viewName) {
+                case 'web':
+                    webView.style.display = 'flex';
+                    break;
+                case 'grid':
+                    gridView.style.display = 'grid';
+                    break;
+                case 'cards':
+                    cardView.style.display = 'block';
+                    break;
+                case 'timeline':
+                    timelineView.style.display = 'block';
+                    break;
+            }
+        }
+        
+        // Show all techs (center node click)
+        function showAllTechs() {
+            const panel = document.querySelector('.detail-panel');
             const backdrop = document.querySelector('.backdrop');
             
-            detailPanel.classList.remove('open');
-            backdrop.classList.remove('open');
+            panel.querySelector('.detail-title').textContent = 'All Technologies';
+            panel.querySelector('.detail-subtitle').textContent = 'My Technical Expertise';
+            
+            // Update content
+            const content = panel.querySelector('.detail-content');
+            content.innerHTML = `
+                <h3>My Technical Expertise</h3>
+                <p>I specialize in full-stack web development with a focus on modern JavaScript frameworks and libraries. My experience spans from frontend UI development to backend API design and database management.</p>
+                
+                <h3>Key Skills</h3>
+                <ul class="feature-list">
+                    <li>Frontend development with React, JavaScript, and modern CSS</li>
+                    <li>Backend development with Node.js and Python</li>
+                    <li>Database design and management (SQL and NoSQL)</li>
+                    <li>RESTful API development and integration</li>
+                    <li>Responsive and accessible web design</li>
+                </ul>
+                
+                <h3>Technology Categories</h3>
+                <div class="related-techs">
+                    <div class="related-tech">Frontend</div>
+                    <div class="related-tech">Backend</div>
+                    <div class="related-tech">Database</div>
+                    <div class="related-tech">DevOps</div>
+                </div>
+            `;
+            
+            // Show panel
+            panel.classList.add('open');
+            backdrop.classList.add('open');
         }
-
-        // Periodically redraw connections for better responsiveness with animations
-        setInterval(drawConnections, 2000);
+        
+        // Filter technologies based on search
+        function filterTechnologies(searchTerm) {
+            const activeView = document.querySelector('.control-btn.active').getAttribute('data-view');
+            
+            // Filter web view
+            if (activeView === 'web') {
+                document.querySelectorAll('.tech-node').forEach(node => {
+                    const id = node.getAttribute('data-id');
+                    const tech = techData.find(t => t.id === id);
+                    
+                    if (tech.name.toLowerCase().includes(searchTerm) || 
+                        tech.category.toLowerCase().includes(searchTerm)) {
+                        node.style.opacity = '1';
+                        node.style.pointerEvents = 'auto';
+                    } else {
+                        node.style.opacity = '0.3';
+                        node.style.pointerEvents = 'none';
+                    }
+                });
+            }
+            
+            // Filter grid view
+            else if (activeView === 'grid') {
+                document.querySelectorAll('.grid-item').forEach(item => {
+                    const id = item.getAttribute('data-id');
+                    const tech = techData.find(t => t.id === id);
+                    
+                    if (tech.name.toLowerCase().includes(searchTerm) || 
+                        tech.category.toLowerCase().includes(searchTerm)) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            }
+            
+            // Filter card view
+            else if (activeView === 'cards') {
+                document.querySelectorAll('.tech-card').forEach(card => {
+                    const id = card.getAttribute('data-id');
+                    const tech = techData.find(t => t.id === id);
+                    
+                    if (tech.name.toLowerCase().includes(searchTerm) || 
+                        tech.category.toLowerCase().includes(searchTerm)) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            }
+            
+            // Filter timeline view
+            else if (activeView === 'timeline') {
+                document.querySelectorAll('.timeline-node').forEach(node => {
+                    const label = node.querySelector('.timeline-label').textContent.toLowerCase();
+                    
+                    if (label.includes(searchTerm)) {
+                        node.style.opacity = '1';
+                        node.style.pointerEvents = 'auto';
+                    } else {
+                        node.style.opacity = '0.3';
+                        node.style.pointerEvents = 'none';
+                    }
+                });
+            }
+        }
+        
+        // Initialize on load
+        window.addEventListener('load', initVisualization);
+        
+        // Resize handling
+        window.addEventListener('resize', () => {
+            const webContainer = document.querySelector('.tech-web');
+            const canvas = document.getElementById('connections');
+            canvas.width = webContainer.offsetWidth;
+            canvas.height = webContainer.offsetHeight;
+            
+            // Recalculate node positions
+            const webCenterX = webContainer.offsetWidth / 2;
+            const webCenterY = webContainer.offsetHeight / 2;
+            const nodePositions = calculateNodePositions(webCenterX, webCenterY, webContainer.offsetWidth * 0.3, techData.length);
+            
+            // Update node positions
+            const nodes = document.querySelectorAll('.tech-node');
+            nodes.forEach((node, index) => {
+                node.style.left = `${nodePositions[index].x - 55}px`;
+                node.style.top = `${nodePositions[index].y - 55}px`;
+            });
+            
+            // Redraw connections
+            drawConnections(canvas, document.querySelector('.web-center'), nodes);
+        });
     </script>
 </body>
 </html>

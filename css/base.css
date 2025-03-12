@@ -1,0 +1,67 @@
+:root {
+  --primary-color: #8c52ff;
+  --primary-glow: rgba(140, 82, 255, 0.25);
+  --dark-bg: #0a0a0a;
+  --darker-bg: #000000;
+  --card-bg: rgba(17, 17, 17, 0.8);
+  --text-color: #ffffff;
+  --text-secondary: #9f9fbd;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  /* More subtle and darker gradient background */
+  background: 
+      radial-gradient(circle at 10% 20%, rgba(140, 82, 255, 0.15) 0%, transparent 30%),
+      radial-gradient(circle at 80% 30%, rgba(140, 82, 255, 0.2) 0%, transparent 35%),
+      radial-gradient(circle at 40% 80%, rgba(140, 82, 255, 0.1) 0%, transparent 30%),
+      linear-gradient(135deg, #0d0518 0%, #1a0b2e 50%, #08050f 100%);
+  background-attachment: fixed;
+  color: var(--text-color);
+  line-height: 1.6;
+  position: relative;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  position: relative;
+  z-index: 1;
+}
+
+h1, h2, .hero-headline, .section-title {
+  background: linear-gradient(90deg, #8c52ff, #ffffff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 10px rgba(140, 82, 255, 0.3);
+}
+
+/* More subtle gradient overlay with darker tones */
+.gradient-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+      radial-gradient(circle at 80% 10%, rgba(140, 82, 255, 0.15), transparent 40%),
+      radial-gradient(circle at 10% 40%, rgba(140, 82, 255, 0.1), transparent 30%),
+      radial-gradient(circle at 50% 90%, rgba(140, 82, 255, 0.12), transparent 40%);
+  pointer-events: none;
+  z-index: -1;
+  animation: gradientPulse 12s infinite ease-in-out;
+}
+
+/* Subtle animation for gradient effect */
+@keyframes gradientPulse {
+  0% { opacity: 0.8; }
+  50% { opacity: 1; }
+  100% { opacity: 0.8; }
+}

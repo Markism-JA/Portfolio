@@ -1,0 +1,70 @@
+/* Services Section with darker glass-like cards */
+.services-section {
+  padding: 60px 0;
+  position: relative;
+}
+
+.section-title {
+  font-size: 28px;
+  margin-bottom: 40px;
+  background: linear-gradient(90deg, #8c52ff, #a370ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 10px rgba(140, 82, 255, 0.2);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+.service-card {
+  background: rgba(13, 13, 13, 0.85);
+  backdrop-filter: blur(8px);
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid rgba(140, 82, 255, 0.15);
+  box-shadow: 0 0 15px rgba(140, 82, 255, 0.15);
+  transition: all 0.3s ease;
+}
+
+.service-card:hover {
+  border-color: rgba(140, 82, 255, 0.25);
+  box-shadow: 0 0 18px rgba(140, 82, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.service-icon {
+  width: 50px;
+  height: 50px;
+  background: rgba(140, 82, 255, 0.1);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20px;
+  box-shadow: 0 0 10px rgba(140, 82, 255, 0.15);
+}
+
+.service-content {
+  flex: 1;
+}
+
+.service-title {
+  font-size: 18px;
+  margin-bottom: 10px;
+  background: linear-gradient(90deg, #8c52ff, #a8a8ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 8px rgba(140, 82, 255, 0.2);
+}
+
+.service-description {
+  font-size: 14px;
+  color: var(--text-secondary);
+  text-shadow: 0 0 5px rgba(168, 168, 255, 0.1);
+}

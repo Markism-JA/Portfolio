@@ -1,0 +1,26 @@
+/* Stats Section with more subtle gradient numbers */
+.stats {
+  display: flex;
+  justify-content: space-between;
+  margin: 40px 0;
+}
+
+.stat-item {
+  text-align: center;
+  position: relative;
+}
+
+.stat-number {
+  font-size: 32px;
+  font-weight: 700;
+  background: linear-gradient(90deg, #8c52ff, #a370ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 10px rgba(140, 82, 255, 0.2);
+}
+
+.stat-label {
+  font-size: 14px;
+  color: var(--text-secondary);
+  text-shadow: 0 0 5px rgba(168, 168, 255, 0.2);
+}
