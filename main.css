@@ -1,0 +1,10 @@
+/* Import all CSS files */
+@import 'css/base.css';
+@import 'css/header.css';
+@import 'css/hero.css';
+@import 'css/stats.css';
+@import 'css/services.css';
+@import 'css/social.css';
+@import 'css/responsive.css';
+@import 'css/footer.css';
+@import 'css/tech.css';

@@ -5,10 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mark Amarille | Software Engineer</title>
     <link rel="icon" href="res/image/logo.svg">
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/tech.css">
-    <link rel="stylesheet" href="css/footer.css">
-
+    <link rel="stylesheet" href="main.css">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/entry.css">
@@ -42,7 +39,6 @@
         <div class="instruction-text">Press Enter or Click the button to continue</div>
     </div>
 
-    <!-- Main content (original website) wrapped in a div for fade-in effect -->
     <div class="main-content">
         <!-- Added gradient overlay -->
         <div class="gradient-overlay"></div>
@@ -53,18 +49,17 @@
                 <div class="logo">
                     <img src="res/image/logo.svg" alt="Logo">
                 </div>
-                
+
                 <nav>
                     <div class="nav-links">
-                        <a href="#home" style="--item-index: 0">Home</a>
-                        <a href="#about" style="--item-index: 1">About</a>
-                        <a href="#services" style="--item-index: 2">Services</a>
+                        <a href="#About" style="--item-index: 0">About</a>
+                        <a href="#Services" style="--item-index: 2">Services</a>
                         <a href="#portfolio" style="--item-index: 3">Portfolio</a>
                         <a href="#experience" style="--item-index: 4">Experience</a>
                         <a href="#blog" style="--item-index: 5">Blog</a>
                     </div>
                 </nav>
-                
+
                 <button class="contact-btn desktop-only">Contact</button>
                 <button class="mobile-menu-btn mobile-only">
                     <i class="fas fa-bars"></i>
@@ -72,7 +67,7 @@
             </header>
 
             <!-- Hero Section -->
-            <section class="hero">
+            <section class="hero" id="About">
                 <div class="hero-content">
                     <div class="hero-intro">
                         <h1 class="hero-title">Hi I'm Mark</h1>
@@ -127,7 +122,7 @@
             
 
             <!-- Services Section -->
-            <section class="services-section">
+            <section class="services-section" id="Services">
                 <h1 class="section-title">My Quality Services</h1>
                 <div class="services-grid">
                     <div class="service-card">
@@ -181,9 +176,8 @@
                 </div>
                 
                     <!-- Additional service cards would be added here -->
-                </div>
             </section>
-            
+
             <!-- Tech stack -->
              <section class="Tech-section">
 
@@ -226,7 +220,6 @@
     </footer>
 
     <script src="script.js"></script>
-    <!-- <script src="navigation.js"></script> -->
 
     
 </body>

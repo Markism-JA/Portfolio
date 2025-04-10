@@ -8,6 +8,18 @@
   --text-secondary: #9f9fbd;
 }
 
+[data-theme="light"] {
+  --primary-color: #8c52ff;
+  --primary-glow: rgba(140, 82, 255, 0.25);
+  --bg: #f8f9fa;
+  --darker-bg: #e9ecef;
+  --card-bg: rgba(255, 255, 255, 0.9);
+  --text-color: #212529;
+  --text-secondary: #495057;
+  --header-bg: rgba(255, 255, 255, 0.95);
+  --header-border: rgba(140, 82, 255, 0.2);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -17,11 +29,11 @@
 
 body {
   /* More subtle and darker gradient background */
-  background: 
-      radial-gradient(circle at 10% 20%, rgba(140, 82, 255, 0.15) 0%, transparent 30%),
-      radial-gradient(circle at 80% 30%, rgba(140, 82, 255, 0.2) 0%, transparent 35%),
-      radial-gradient(circle at 40% 80%, rgba(140, 82, 255, 0.1) 0%, transparent 30%),
-      linear-gradient(135deg, #0d0518 0%, #1a0b2e 50%, #08050f 100%);
+  background:
+    radial-gradient(circle at 10% 20%, rgba(140, 82, 255, 0.15) 0%, transparent 30%),
+    radial-gradient(circle at 80% 30%, rgba(140, 82, 255, 0.2) 0%, transparent 35%),
+    radial-gradient(circle at 40% 80%, rgba(140, 82, 255, 0.1) 0%, transparent 30%),
+    linear-gradient(135deg, #0d0518 0%, #1a0b2e 50%, #08050f 100%);
   background-attachment: fixed;
   color: var(--text-color);
   line-height: 1.6;

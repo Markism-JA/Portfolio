@@ -1,0 +1,1641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Fitness App Wireframes</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #e0e0e0;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #1a1a1a;
+        }
+        
+        .wireframe-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+        
+        .wireframe {
+            background-color: #212121;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            width: 320px;
+            height: 640px;
+            padding: 20px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .wireframe-title {
+            text-align: center;
+            font-weight: bold;
+            font-size: 18px;
+            color: #aaa;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+        }
+        
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            margin-bottom: 15px;
+            color: #999;
+        }
+        
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .back-button {
+            width: 30px;
+            height: 30px;
+            border-radius: 15px;
+            background-color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+        }
+        
+        .screen-title {
+            font-weight: bold;
+            font-size: 20px;
+        }
+        
+        .button {
+            background-color: #9C27B0;
+            border-radius: 8px;
+            color: white;
+            text-align: center;
+            padding: 12px;
+            margin: 8px 0;
+            font-weight: bold;
+        }
+        
+        .secondary-button {
+            background-color: #333;
+            border-radius: 8px;
+            color: #ddd;
+            text-align: center;
+            padding: 12px;
+            margin: 8px 0;
+            font-weight: bold;
+        }
+        
+        .input-field {
+            background-color: #333;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 8px 0;
+        }
+        
+        .checkbox {
+            display: flex;
+            align-items: center;
+            margin: 8px 0;
+        }
+        
+        .checkbox-box {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #555;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        
+        .radio {
+            display: flex;
+            align-items: center;
+            margin: 8px 0;
+        }
+        
+        .radio-circle {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #555;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        
+        .card {
+            background-color: #2d2d2d;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .exercise-card {
+            display: flex;
+            background-color: #2d2d2d;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            align-items: center;
+        }
+        
+        .exercise-image {
+            width: 80px;
+            height: 80px;
+            background-color: #444;
+            border-radius: 8px;
+            margin-right: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #999;
+            font-size: 12px;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background-color: #444;
+            border-radius: 4px;
+            margin: 15px 0;
+            position: relative;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background-color: #9C27B0;
+            border-radius: 4px;
+            width: 60%;
+        }
+        
+        .bottom-nav {
+            display: flex;
+            justify-content: space-around;
+            background-color: #262626;
+            padding: 15px 0;
+            border-top: 1px solid #333;
+            margin-top: auto;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 12px;
+        }
+        
+        .nav-icon {
+            width: 24px;
+            height: 24px;
+            background-color: #444;
+            border-radius: 12px;
+            margin-bottom: 5px;
+        }
+        
+        .timer-circle {
+            width: 180px;
+            height: 180px;
+            border-radius: 90px;
+            border: 8px solid #9C27B0;
+            margin: 20px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 32px;
+            font-weight: bold;
+        }
+        
+        .reps-sets {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+        
+        .counter {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .counter-buttons {
+            display: flex;
+            align-items: center;
+        }
+        
+        .counter-button {
+            width: 40px;
+            height: 40px;
+            border-radius: 20px;
+            background-color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            margin: 0 10px;
+        }
+        
+        .counter-value {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .badge {
+            width: 80px;
+            height: 80px;
+            border-radius: 40px;
+            background-color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 10px;
+        }
+        
+        .badges-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .section-title {
+            font-weight: bold;
+            margin: 20px 0 10px 0;
+            color: #bbb;
+        }
+        
+        .workout-summary {
+            background-color: #2d2d2d;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 10px 0;
+        }
+        
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+        }
+        
+        h1 {
+            color: #e0e0e0;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        h2 {
+            color: #ccc;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+        }
+        
+        .highlight-card {
+            background-color: rgba(156, 39, 176, 0.2);
+            border: 1px solid rgba(156, 39, 176, 0.5);
+        }
+        
+        .accent-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 20px;
+            background-color: #9C27B0;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+        
+        .active-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 20px;
+            background-color: rgba(156, 39, 176, 0.2);
+            color: #9C27B0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        .tag-pill {
+            background-color: #333;
+            border-radius: 20px;
+            padding: 10px 15px;
+            margin: 5px;
+        }
+        
+        .tag-pill-active {
+            background-color: #9C27B0;
+            color: white;
+            border-radius: 20px;
+            padding: 10px 15px;
+            margin: 5px;
+        }
+        
+        .flow-section {
+            margin-bottom: 50px;
+        }
+        
+        .chart-bar {
+            height: 20px;
+            background-color: #9C27B0;
+            border-radius: 4px;
+            margin: 5px 0;
+        }
+        
+        .calendar-cell {
+            width: 28px;
+            height: 28px;
+            background-color: #333;
+            border-radius: 4px;
+            margin: 2px;
+            font-size: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .calendar-row {
+            display: flex;
+            margin-bottom: 4px;
+        }
+        
+        .level-badge {
+            width: 60px;
+            height: 60px;
+            border-radius: 30px;
+            background-color: #9C27B0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            margin-right: 15px;
+        }
+    </style>
+</head>
+<body>
+    <h1>StriveFit - Dark Mode</h1>
+    
+    <h2>1. Onboarding Flow</h2>
+    <div class="wireframe-container">
+
+        <!-- Welcome Screen -->
+        <div class="wireframe">
+            <div class="wireframe-title">Welcome Screen</div>
+            <div class="status-bar">
+                <span>9:41 AM</span>
+                <span>100%</span>
+            </div>
+            
+            <div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+                <div style="width: 100px; height: 100px; background-color: #9C27B0; border-radius: 50%; margin-bottom: 20px; display: flex; justify-content: center; align-items: center; color: white;">
+                    Logo
+                </div>
+                <div style="font-size: 28px; font-weight: bold; margin-bottom: 10px;">FitTrack Pro</div>
+                <div style="color: #999; margin-bottom: 40px;">Your personalized fitness journey</div>
+                
+                <div class="button">Sign Up</div>
+                <div class="secondary-button">Continue as Guest</div>
+                <div style="margin-top: 20px; font-size: 14px; color: #999;">Already have an account? <span style="color: #9C27B0; font-weight: bold;">Log In</span></div>
+            </div>
+        </div>
+        
+        <!-- Log In Screen -->
+        <div class="wireframe">
+            <div class="wireframe-title">Log In Screen</div>
+            <div class="status-bar">
+                <span>9:41 AM</span>
+                <span>100%</span>
+            </div>
+            
+            <div class="nav-bar">
+                <div class="back-button">&lt;</div>
+                <div class="screen-title">Log In</div>
+                <div style="width: 30px;"></div>
+            </div>
+            
+            <div style="margin-top: 40px;">
+                <div style="margin-bottom: 10px;">Email</div>
+                <div class="input-field">user@example.com</div>
+                
+                <div style="margin-bottom: 10px; margin-top: 20px;">Password</div>
+                <div class="input-field">••••••••</div>
+                
+                <div style="text-align: right; color: #9C27B0; font-size: 14px; margin: 10px 0 30px;">Forgot Password?</div>
+                
+                <div class="button">Log In</div>
+                
+                <div style="margin-top: 30px; text-align: center;">
+                    <div style="color: #999; margin-bottom: 20px;">Or log in with</div>
+                    <div style="display: flex; justify-content: center; gap: 20px;">
+                        <div style="width: 50px; height: 50px; background-color: #333; border-radius: 25px; display: flex; justify-content: center; align-items: center;">G</div>
+                        <div style="width: 50px; height: 50px; background-color: #333; border-radius: 25px; display: flex; justify-content: center; align-items: center;">f</div>
+                        <div style="width: 50px; height: 50px; background-color: #333; border-radius: 25px; display: flex; justify-content: center; align-items: center;">A</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Sign Up Screen -->
+        <div class="wireframe">
+            <div class="wireframe-title">Sign Up Screen</div>
+            <div class="status-bar">
+                <span>9:41 AM</span>
+                <span>100%</span>
+            </div>
+            
+            <div class="nav-bar">
+                <div class="back-button">&lt;</div>
+                <div class="screen-title">Create Account</div>
+                <div style="width: 30px;"></div>
+            </div>
+            
+            <div style="margin-top: 20px;">
+                <div style="margin-bottom: 10px;">Full Name</div>
+                <div class="input-field">Alex Johnson</div>
+                
+                <div style="margin-bottom: 10px; margin-top: 15px;">Email</div>
+                <div class="input-field">alex@example.com</div>
+                
+                <div style="margin-bottom: 10px; margin-top: 15px;">Password</div>
+                <div class="input-field">••••••••</div>
+                
+                <div style="margin-bottom: 10px; margin-top: 15px;">Confirm Password</div>
+                <div class="input-field">••••••••</div>
+                
+                <div class="checkbox" style="margin-top: 20px;">
+                    <div class="checkbox-box" style="background-color: #9C27B0; border-color: #9C27B0;"></div>
+                    <div style="font-size: 14px;">I agree to the Terms & Privacy Policy</div>
+                </div>
+                
+                <div class="button" style="margin-top: 20px;">Create Account</div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <h2>2. User Profile Setup</h2>
+    <div class="wireframe-container">
+        <!-- User Profile Setup - Goals -->
+        <div class="wireframe">
+            <div class="wireframe-title">User Profile Setup - Goals</div>
+            <div class="status-bar">
+                <span>9:41 AM</span>
+                <span>100%</span>
+            </div>
+            
+            <div class="nav-bar">
+                <div class="back-button">&lt;</div>
+                <div class="screen-title">Your Goals</div>
+                <div style="width: 30px;"></div>
+            </div>
+            
+            <div style="margin-bottom: 20px; color: #999;">
+                Select your primary fitness goals (choose up to 3)
+            </div>
+            
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 20%;"></div>
+            </div>
+            <div style="font-size: 12px; color: #999; text-align: right; margin-bottom: 20px;">Step 1 of 5</div>
+            
+            <div class="checkbox">
+                <div class="checkbox-box"></div>
+                <div>Build muscle</div>
+            </div>
+            <div class="checkbox">
+                <div class="checkbox-box" style="background-color: #9C27B0; border-color: #9C27B0;"></div>
+                <div>Lose weight</div>
+            </div>
+            <div class="checkbox">
+                <div class="checkbox-box"></div>
+                <div>Improve fitness</div>
+            </div>
+            <div class="checkbox">
+                <div class="checkbox-box" style="background-color: #9C27B0; border-color: #9C27B0;"></div>
+                <div>Increase strength</div>
+            </div>
+            <div class="checkbox">
+                <div class="checkbox-box"></div>
+                <div>Improve flexibility</div>
+            </div>
+            <div class="checkbox">
+                <div class="checkbox-box"></div>
+                <div>Train for sports</div>
+            </div>
+            <div class="checkbox">
+                <div class="checkbox-box"></div>
+                <div>Maintain current fitness</div>
+            </div>
+            
+            <div style="margin-top: auto;">
+                <div class="button">Continue</div>
+            </div>
+        </div>
+        
+        <!-- User Profile Setup - Experience -->
+        <div class="wireframe">
+            <div class="wireframe-title">User Profile Setup - Experience</div>
+            <div class="status-bar">
+                <span>9:41 AM</span>
+                <span>100%</span>
+            </div>
+            
+            <div class="nav-bar">
+                <div class="back-button">&lt;</div>
+                <div class="screen-title">Experience Level</div>
+                <div style="width: 30px;"></div>
+            </div>
+            
+            <div style="margin-bottom: 20px; color: #999;">
+                Tell us about your fitness experience
+            </div>
+            
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 40%;"></div>
+            </div>
+            <div style="font-size: 12px; color: #999; text-align: right; margin-bottom: 20px;">Step 2 of 5</div>
+            
+            <div class="radio">
+                <div class="radio-circle"></div>
+                <div>Beginner - New to working out</div>
+            </div>
+            <div class="radio">
+                <div class="radio-circle" style="background-color: #9C27B0; border-color: #9C27B0;"></div>
+                <div>Intermediate - Some experience</div>
+            </div>
+            <div class="radio">
+                <div class="radio-circle"></div>
+                <div>Advanced - Consistent training</div>
+            </div>
+            <div class="radio">
+                <div class="radio-circle"></div>
+                <div>Expert - Years of training</div>
+            </div>
+            
+            <div style="margin-top: auto;">
+                <div class="button">Continue</div>
+            </div>
+        </div>
+        
+        <!-- User Profile Setup - Body Focus -->
+        <div class="wireframe">
+            <div class="wireframe-title">User Profile Setup - Body Focus</div>
+            <div class="status-bar">
+                <span>9:41 AM</span>
+                <span>100%</span>
+            </div>
+            
+            <div class="nav-bar">
+                <div class="back-button">&lt;</div>
+                <div class="screen-title">Body Focus Areas</div>
+                <div style="width: 30px;"></div>
+            </div>
+            
+            <div style="margin-bottom: 20px; color: #999;">
+                Select areas you want to focus on
+            </div>
+            
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 60%;"></div>
+            </div>
+            <div style="font-size: 12px; color: #999; text-align: right; margin-bottom: 20px;">Step 3 of 5</div>
+            
+            <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px;">
+                <div class="tag-pill-active">Arms</div>
+                <div class="tag-pill">Chest</div>
+                <div class="tag-pill-active">Back</div>
+                <div class="tag-pill">Shoulders</div>
+                <div class="tag-pill">Core</div>
+                <div class="tag-pill-active">Legs</div>
+                <div class="tag-pill">Glutes</div>
+                <div class="tag-pill">Full Body</div>
+            </div>
+
+            //add ui to show body part selected
+            
+            <div style="margin-top: auto;">
+                <div class="button">Continue</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="wireframe-container">
+
+        <!-- User Profile Setup - Equipment -->
+        <div class="wireframe">
+            <div class="wireframe-title">User Profile Setup - Equipment</div>
+            <div class="status-bar">
+                <span>9:41 AM</span>
+                <span>100%</span>
+            </div>
+            
+            <div class="nav-bar">
+                <div class="back-button">&lt;</div>
+                <div class="screen-title">Available Equipment</div>
+                <div style="width: 30px;"></div>
+            </div>
+            
+            <div style="margin-bottom: 20px; color: #999;">
+                Tell us what equipment you have access to
+            </div>
+            
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 80%;"></div>
+            </div>
+            <div style="font-size: 12px; color: #999; text-align: right; margin-bottom: 20px;">Step 4 of 5</div>
+            
+            <div class="checkbox">
+                <div class="checkbox-box" style="background-color: #9C27B0; border-color: #9C27B0;"></div>
+                <div>No equipment (Bodyweight only)</div>
+            </div>
+            <div class="checkbox">
+                <div class="checkbox-box" style="background-color: #9C27B0; border-color: #9C27B0;"></div>
+                <div>Dumbbells</div>
+            </div>
+            <div class="checkbox">
+                <div class="checkbox-box"></div>
+                <div>Barbell & Weights</div>
+            </div>
+            <div class="checkbox">
+                <div class="checkbox-box"></div>
+                <div>Resistance Bands</div>
+            </div>
+            <div class="checkbox">
+                <div class="checkbox-box" style="background-color: #9C27B0; border-color: #9C27B0;"></div>
+                <div>Pull-up Bar</div>
+            </div>
+            <div class="checkbox">
+                <div class="checkbox-box"></div>
+                <div>Bench</div>
+            </div>
+            <div class="checkbox">
+                <div class="checkbox-box"></div>
+                <div>Cable Machine</div>
+            </div>
+            <div class="checkbox">
+                <div class="checkbox-box"></div>
+                <div>Full Gym Access</div>
+            </div>
+            
+            <div style="margin-top: auto;">
+                <div class="button">Continue</div>
+            </div>
+        </div>
+        
+        <!-- User Profile Setup - Preferences -->
+        <div class="wireframe">
+            <div class="wireframe-title">User Profile Setup - Preferences</div>
+            <div class="status-bar">
+                <span>9:41 AM</span>
+                <span>100%</span>
+            </div>
+            
+            <div class="nav-bar">
+                <div class="back-button">&lt;</div>
+                <div class="screen-title">Workout Preferences</div>
+                <div style="width: 30px;"></div>
+            </div>
+            
+            <div style="margin-bottom: 20px; color: #999;">
+                Set your workout preferences
+            </div>
+            
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 100%;"></div>
+            </div>
+            <div style="font-size: 12px; color: #999; text-align: right; margin-bottom: 20px;">Step 5 of 5</div>
+            
+            <div style="margin-bottom: 20px;">
+                <div style="margin-bottom: 10px;">Workouts per week</div>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>2</div>
+                    <div style="flex-grow: 1; padding: 0 15px;">
+                        <div class="progress-bar" style="margin: 0;">
+                            <div class="progress-fill" style="width: 40%;"></div>
+                        </div>
+                    </div>
+                    <div>7</div>
+                </div>
+                <div style="text-align: center; color: #999; font-size: 14px;">4 days</div>
+            </div>
+            
+            <div style="margin-bottom: 20px;">
+                <div style="margin-bottom: 10px;">Workout duration</div>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>15m</div>
+                    <div style="flex-grow: 1; padding: 0 15px;">
+                        <div class="progress-bar" style="margin: 0;">
+                            <div class="progress-fill" style="width: 60%;"></div>
+                        </div>
+                    </div>
+                    <div>90m</div>
+                </div>
+                <div style="text-align: center; color: #999; font-size: 14px;">45 minutes</div>
+            </div>
+            
+            <div style="margin-bottom: 20px;">
+                <div style="margin-bottom: 10px;">Preferred workout time</div>
+                <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                    <div class="tag-pill">Early Morning</div>
+                    <div class="tag-pill-active">Morning</div>
+                    <div class="tag-pill">Afternoon</div>
+                    <div class="tag-pill">Evening</div>
+                    <div class="tag-pill">Late Night</div>
+                </div>
+            </div>
+            
+            <div style="margin-top: auto;">
+                <div class="button">Create My Plan</div>
+            </div>
+        </div>
+    </div>
+
+    <h2>3. Main App Flow</h2>
+    <div class ="wireframe-container">
+
+      <!-- Home Screen - Main View -->
+  <div class="wireframe">
+    <div class="status-bar">
+        <span>9:41 AM</span>
+        <span>100%</span>
+    </div>
+  
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <div style="font-size: 24px; font-weight: bold;">Hello, Alex!</div>
+        <div style="width: 40px; height: 40px; background-color: #444; border-radius: 20px;"></div>
+    </div>
+  
+    <div class="card highlight-card" style="margin-bottom: 20px;">
+        <div style="font-weight: bold; margin-bottom: 10px;">Today's Workout</div>
+        <div style="font-size: 18px; font-weight: bold; margin-bottom: 5px;">Upper Body Strength</div>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+            <div style="color: #999;">30 minutes • 5 exercises</div>
+            <div style="color: #9C27B0; font-weight: bold;">Start</div>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-fill" style="width: 0%;"></div>
+        </div>
+    </div>
+  
+    <div class="section-title">Your Progress</div>
+    <div class="card">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+            <div>
+                <div style="font-size: 24px; font-weight: bold;">12</div>
+                <div style="color: #999; font-size: 12px;">Workouts</div>
+            </div>
+            <div>
+                <div style="font-size: 24px; font-weight: bold;">345</div>
+                <div style="color: #999; font-size: 12px;">Minutes</div>
+            </div>
+            <div>
+                <div style="font-size: 24px; font-weight: bold;">4</div>
+                <div style="color: #999; font-size: 12px;">Week Streak</div>
+            </div>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-fill" style="width: 60%;"></div>
+        </div>
+        <div style="font-size: 12px; color: #999; text-align: right;">60% to next level</div>
+    </div>
+
+    <!-- Floating Action Button - Play button triangle -->
+    <div style="position: absolute; bottom: 80px; right: 20px; width: 60px; height: 60px; background-color: #9C27B0; border-radius: 30px; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 8px rgba(0,0,0,0.3);">
+      <div style="width: 0; height: 0; border-top: 12px solid transparent; border-bottom: 12px solid transparent; border-left: 20px solid white; margin-left: 4px;"></div>
+    </div>
+    <div style="position: absolute; bottom: 65px; right: 85px; background-color: rgba(156, 39, 176, 0.8); padding: 5px 10px; border-radius: 4px; font-size: 12px; color: white;">
+      Exercise Now
+    </div>
+  
+    <div class="bottom-nav">
+        <div class="nav-item" style="color: #9C27B0;">
+            <div class="nav-icon" style="background-color: rgba(156, 39, 176, 0.3);"></div>
+            <div>Home</div>
+        </div>
+        <div class="nav-item">
+            <div class="nav-icon"></div>
+            <div>Workouts</div>
+        </div>
+        <div class="nav-item">
+            <div class="nav-icon"></div>
+            <div>Challenges</div>
+        </div>
+        <div class="nav-item">
+            <div class="nav-icon"></div>
+            <div>Profile</div>
+        </div>
+    </div>
+  </div>
+
+  <!-- Home Screen - Stats View -->
+  <div class="wireframe">
+    <div class="status-bar">
+        <span>9:41 AM</span>
+        <span>100%</span>
+    </div>
+  
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <div style="font-size: 24px; font-weight: bold;">Hello, Alex!</div>
+        <div style="width: 40px; height: 40px; background-color: #444; border-radius: 20px;"></div>
+    </div>
+  
+    <div class="section-title">Today's Activity</div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;">
+      <div class="card" style="padding: 15px; display: flex; flex-direction: column; align-items: center;">
+        <div style="width: 40px; height: 40px; background-color: rgba(156, 39, 176, 0.2); border-radius: 20px; display: flex; justify-content: center; align-items: center; margin-bottom: 10px;">
+          🔥
+        </div>
+        <div style="font-size: 24px; font-weight: bold; margin-bottom: 5px;">356</div>
+        <div style="color: #999; font-size: 14px;">Calories Burned</div>
+      </div>
+      
+      <div class="card" style="padding: 15px; display: flex; flex-direction: column; align-items: center;">
+        <div style="width: 40px; height: 40px; background-color: rgba(156, 39, 176, 0.2); border-radius: 20px; display: flex; justify-content: center; align-items: center; margin-bottom: 10px;">
+          🏃
+        </div>
+        <div style="font-size: 24px; font-weight: bold; margin-bottom: 5px;">7,245</div>
+        <div style="color: #999; font-size: 14px;">Steps</div>
+      </div>
+    </div>
+    
+    <div class="section-title">Exercise Summary</div>
+    <div class="card" style="padding: 0; overflow: hidden; margin-bottom: 20px;">
+      <div style="display: flex; align-items: center; padding: 15px; border-bottom: 1px solid #333;">
+        <div style="width: 40px; height: 40px; background-color: #444; border-radius: 8px; display: flex; justify-content: center; align-items: center; margin-right: 15px;">
+          🏋️
+        </div>
+        <div style="flex-grow: 1;">
+          <div style="font-weight: bold;">Morning Workout</div>
+          <div style="color: #999; font-size: 12px;">25 minutes • Upper Body</div>
+        </div>
+        <div style="color: #9C27B0; font-weight: bold;">156 cal</div>
+      </div>
+      
+      <div style="display: flex; align-items: center; padding: 15px; border-bottom: 1px solid #333;">
+        <div style="width: 40px; height: 40px; background-color: #444; border-radius: 8px; display: flex; justify-content: center; align-items: center; margin-right: 15px;">
+          🚶
+        </div>
+        <div style="flex-grow: 1;">
+          <div style="font-weight: bold;">Lunch Walk</div>
+          <div style="color: #999; font-size: 12px;">20 minutes • 1.2 miles</div>
+        </div>
+        <div style="color: #9C27B0; font-weight: bold;">110 cal</div>
+      </div>
+      
+      <div style="display: flex; align-items: center; padding: 15px;">
+        <div style="width: 40px; height: 40px; background-color: #444; border-radius: 8px; display: flex; justify-content: center; align-items: center; margin-right: 15px;">
+          🧘
+        </div>
+        <div style="flex-grow: 1;">
+          <div style="font-weight: bold;">Evening Stretch</div>
+          <div style="color: #999; font-size: 12px;">15 minutes • Flexibility</div>
+        </div>
+        <div style="color: #9C27B0; font-weight: bold;">90 cal</div>
+      </div>
+    </div>
+
+    <!-- Floating Action Button - Play button triangle -->
+    <div style="position: absolute; bottom: 80px; right: 20px; width: 60px; height: 60px; background-color: #9C27B0; border-radius: 30px; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 8px rgba(0,0,0,0.3);">
+      <div style="width: 0; height: 0; border-top: 12px solid transparent; border-bottom: 12px solid transparent; border-left: 20px solid white; margin-left: 4px;"></div>
+    </div>
+    <div style="position: absolute; bottom: 65px; right: 85px; background-color: rgba(156, 39, 176, 0.8); padding: 5px 10px; border-radius: 4px; font-size: 12px; color: white;">
+      Exercise Now
+    </div>
+  
+    <div class="bottom-nav">
+        <div class="nav-item" style="color: #9C27B0;">
+            <div class="nav-icon" style="background-color: rgba(156, 39, 176, 0.3);"></div>
+            <div>Home</div>
+        </div>
+        <div class="nav-item">
+            <div class="nav-icon"></div>
+            <div>Workouts</div>
+        </div>
+        <div class="nav-item">
+            <div class="nav-icon"></div>
+            <div>Challenges</div>
+        </div>
+        <div class="nav-item">
+            <div class="nav-icon"></div>
+            <div>Profile</div>
+        </div>
+    </div>
+  </div>
+              <!-- Workout In Progress -->
+              <div class="wireframe">
+                  <div class="status-bar">
+                      <span>9:41 AM</span>
+                      <span>100%</span>
+                  </div>
+                  
+                  <div class="nav-bar">
+                      <div class="back-button">&lt;</div>
+                      <div class="screen-title">Push-ups</div>
+                      <div style="width: 30px;"></div>
+                  </div>
+                  
+                  <div class="exercise-image" style="width: 100%; height: 160px; margin: 0 0 20px 0;">
+                      Exercise Demo
+                  </div>
+                  
+                  <div class="timer-circle">
+                      00:45
+                  </div>
+                  
+                  <div class="reps-sets">
+                      <div class="counter">
+                          <div style="color: #999;">Sets</div>
+                          <div class="counter-buttons">
+                              <div class="counter-button">-</div>
+                              <div class="counter-value">2/3</div>
+                              <div class="counter-button">+</div>
+                          </div>
+                      </div>
+                      <div class="counter">
+                          <div style="color: #999;">Reps</div>
+                          <div class="counter-buttons">
+                              <div class="counter-button">-</div>
+                              <div class="counter-value">12</div>
+                              <div class="counter-button">+</div>
+                          </div>
+                      </div>
+                  </div>
+                  
+                  <div style="margin-top: 30px;">
+                      <div class="button">Complete & Next</div>
+                      <div class="secondary-button">Skip Exercise</div>
+                  </div>
+                  
+                  <div class="progress-bar" style="margin-top: 30px;">
+                      <div class="progress-fill" style="width: 40%;"></div>
+                  </div>
+                  <div style="display: flex; justify-content: space-between; font-size: 12px; color: #999;">
+                      <div>Exercise 2 of 5</div>
+                      <div>40% Completed</div>
+                  </div>
+              </div>
+              
+            <!-- Workout Summary -->
+            <div class="wireframe">
+              <div class="wireframe-title">Workout Summary</div>
+              <div class="status-bar">
+                  <span>9:41 AM</span>
+                  <span>100%</span>
+              </div>
+              
+              <div class="nav-bar">
+                  <div class="back-button">&lt;</div>
+                  <div class="screen-title">Workout Complete!</div>
+                  <div style="width: 30px;"></div>
+              </div>
+              
+              <div style="display: flex; align-items: center; margin: 15px 0;">
+                  <div style="width: 60px; height: 60px; background-color: #9C27B0; border-radius: 30px; display: flex; justify-content: center; align-items: center; margin-right: 15px;">
+                      ✓
+                  </div>
+                  <div>
+                      <div style="font-size: 18px; font-weight: bold;">Great job!</div>
+                      <div style="color: #999; font-size: 14px;">You've completed your workout</div>
+                  </div>
+              </div>
+              
+              <div class="workout-summary" style="padding: 15px; margin-bottom: 15px;">
+                  <div style="font-weight: bold; margin-bottom: 10px;">Workout Summary</div>
+                  
+                  <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
+                      <div>
+                          <div style="color: #999; font-size: 12px;">Duration</div>
+                          <div style="font-weight: bold;">32 minutes</div>
+                      </div>
+                      <div>
+                          <div style="color: #999; font-size: 12px;">Calories</div>
+                          <div style="font-weight: bold;">245 cal</div>
+                      </div>
+                      <div>
+                          <div style="color: #999; font-size: 12px;">Exercises</div>
+                          <div style="font-weight: bold;">5/5</div>
+                      </div>
+                      <div>
+                          <div style="color: #999; font-size: 12px;">Volume</div>
+                          <div style="font-weight: bold;">2,450 kg</div>
+                      </div>
+                  </div>
+              </div>
+              
+              <div class="card" style="display: flex; align-items: center; padding: 12px; margin-bottom: 15px;">
+                  <div style="width: 45px; height: 45px; background-color: #9C27B0; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-right: 15px; font-size: 18px;">
+                      ★
+                  </div>
+                  <div>
+                      <div style="font-weight: bold; font-size: 14px;">Consistency Champion</div>
+                      <div style="color: #999; font-size: 12px;">Complete 3 workouts in a week</div>
+                  </div>
+              </div>
+              
+              <div style="margin-top: auto;">
+                  <div class="button">Share Results</div>
+                  <div class="secondary-button">Back to Home</div>
+              </div>
+            </div>
+    
+       <!-- Challenges Screen - Active View -->
+      <div class="wireframe">
+        <div class="wireframe-title">Challenges Screen - Active View</div>
+        <div class="status-bar">
+            <span>9:41 AM</span>
+            <span>100%</span>
+        </div>
+      
+        <div class="nav-bar">
+            <div class="back-button">&lt;</div>
+            <div class="screen-title">Challenges</div>
+            <div style="width: 30px;"></div>
+        </div>
+      
+        <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+            <div class="tag-pill-active">Active</div>
+            <div class="tag-pill">Completed</div>
+            <div class="tag-pill">Community</div>
+        </div>
+      
+        <div class="card highlight-card" style="margin-bottom: 20px; position: relative;">
+            <div style="position: absolute; top: 10px; right: 10px; background-color: #9C27B0; border-radius: 15px; padding: 5px 10px; font-size: 12px;">
+                2 days left
+            </div>
+            <div style="font-weight: bold; margin-bottom: 10px;">Weekly Challenge</div>
+            <div style="font-size: 18px; font-weight: bold; margin-bottom: 5px;">100 Push-up Challenge</div>
+            <div style="color: #999; margin-bottom: 15px;">Complete 100 push-ups in one week</div>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 70%;"></div>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
+                <div style="color: #999;">70/100 completed</div>
+                <div style="color: #9C27B0; font-weight: bold;">Log Reps</div>
+            </div>
+        </div>
+      
+        <div class="section-title">Community Leaderboard</div>
+        <div class="card" style="padding: 0; overflow: hidden;">
+            <div style="display: flex; align-items: center; padding: 15px; background-color: rgba(156, 39, 176, 0.1);">
+                <div class="level-badge" style="width: 40px; height: 40px; font-size: 16px; margin-right: 10px;">1</div>
+                <div style="flex-grow: 1;">
+                    <div style="font-weight: bold;">Alex J. (You)</div>
+                    <div style="color: #999; font-size: 12px;">70 push-ups</div>
+                </div>
+                <div style="color: #9C27B0; font-weight: bold;">🏆</div>
+            </div>
+          
+            <div style="display: flex; align-items: center; padding: 15px; border-top: 1px solid #333;">
+                <div class="level-badge" style="width: 40px; height: 40px; font-size: 16px; background-color: #666; margin-right: 10px;">2</div>
+                <div style="flex-grow: 1;">
+                    <div style="font-weight: bold;">Taylor S.</div>
+                    <div style="color: #999; font-size: 12px;">65 push-ups</div>
+                </div>
+            </div>
+          
+            <div style="display: flex; align-items: center; padding: 15px; border-top: 1px solid #333;">
+                <div class="level-badge" style="width: 40px; height: 40px; font-size: 16px; background-color: #666; margin-right: 10px;">3</div>
+                <div style="flex-grow: 1;">
+                    <div style="font-weight: bold;">Jamie L.</div>
+                    <div style="color: #999; font-size: 12px;">58 push-ups</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bottom-nav">
+            <div class="nav-item">
+                <div class="nav-icon"></div>
+                <div>Home</div>
+            </div>
+            <div class="nav-item">
+                <div class="nav-icon"></div>
+                <div>Workouts</div>
+            </div>
+            <div class="nav-item" style="color: #9C27B0;">
+                <div class="nav-icon" style="background-color: rgba(156, 39, 176, 0.3);"></div>
+                <div>Challenges</div>
+            </div>
+            <div class="nav-item">
+                <div class="nav-icon"></div>
+                <div>Profile</div>
+            </div>
+        </div>
+      </div>
+      
+      <!-- Challenges Screen - Browse View -->
+      <div class="wireframe">
+        <div class="wireframe-title">Challenges Screen - Browse View</div>
+        <div class="status-bar">
+            <span>9:41 AM</span>
+            <span>100%</span>
+        </div>
+      
+        <div class="nav-bar">
+            <div class="back-button">&lt;</div>
+            <div class="screen-title">Challenges</div>
+            <div style="width: 30px;"></div>
+        </div>
+      
+        <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+            <div class="tag-pill">Active</div>
+            <div class="tag-pill">Completed</div>
+            <div class="tag-pill-active">Browse</div>
+        </div>
+      
+        <div class="section-title">Challenges For You</div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 15px;">
+            <div class="card" style="padding: 12px; display: flex; flex-direction: column; align-items: center; text-align: center;">
+                <div style="width: 50px; height: 50px; background-color: #444; border-radius: 8px; display: flex; justify-content: center; align-items: center; margin-bottom: 10px;">
+                    🏃
+                </div>
+                <div style="font-weight: bold; font-size: 14px;">10K Steps Daily</div>
+                <div style="color: #999; font-size: 12px;">100 XP reward</div>
+                <div class="button" style="padding: 5px 8px; margin-top: 8px; font-size: 12px;">Join</div>
+            </div>
+          
+            <div class="card" style="padding: 12px; display: flex; flex-direction: column; align-items: center; text-align: center;">
+                <div style="width: 50px; height: 50px; background-color: #444; border-radius: 8px; display: flex; justify-content: center; align-items: center; margin-bottom: 10px;">
+                    💪
+                </div>
+                <div style="font-weight: bold; font-size: 14px;">30-Day Plank</div>
+                <div style="color: #999; font-size: 12px;">250 XP reward</div>
+                <div class="button" style="padding: 5px 8px; margin-top: 8px; font-size: 12px;">Join</div>
+            </div>
+        </div>
+        
+        <div class="bottom-nav">
+            <div class="nav-item">
+                <div class="nav-icon"></div>
+                <div>Home</div>
+            </div>
+            <div class="nav-item">
+                <div class="nav-icon"></div>
+                <div>Workouts</div>
+            </div>
+            <div class="nav-item" style="color: #9C27B0;">
+                <div class="nav-icon" style="background-color: rgba(156, 39, 176, 0.3);"></div>
+                <div>Challenges</div>
+            </div>
+            <div class="nav-item">
+                <div class="nav-icon"></div>
+                <div>Profile</div>
+            </div>
+        </div>
+      </div>
+
+<!-- Settings Screen -->
+<div class="wireframe">
+  <div class="wireframe-title">Settings Screen</div>
+  <div class="status-bar">
+    <span>9:41 AM</span>
+    <span>100%</span>
+  </div>
+
+  <div class="nav-bar">
+    <div class="back-button">&lt;</div>
+    <div class="screen-title">Settings</div>
+    <div style="width: 30px;"></div>
+  </div>
+
+  <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+    <div class="tag-pill-active">Profile</div>
+    <div class="tag-pill">Preferences</div>
+    <div class="tag-pill">About</div>
+  </div>
+
+  <!-- User Profile Section -->
+  <div class="section-title">User Profile</div>
+  <div class="card" style="padding: 16px; display: flex; align-items: center; margin-bottom: 15px;">
+    <div style="width: 60px; height: 60px; background-color: #444; border-radius: 30px; display: flex; justify-content: center; align-items: center; margin-right: 15px;">
+      👤
+    </div>
+    <div>
+      <div style="font-weight: bold; font-size: 16px;">John Doe</div>
+      <div style="color: #999; font-size: 14px;">@johndoe</div>
+      <div style="font-size: 12px;">Fitness Enthusiast since 2023</div>
+    </div>
+  </div>
+
+  <!-- Settings Options -->
+  <div class="section-title">Options</div>
+  <div class="card" style="margin-bottom: 15px;">
+    <div style="display: flex; justify-content: space-between; padding: 12px; border-bottom: 1px solid #eee;">
+      <div style="display: flex; align-items: center;">
+        <div style="width: 24px; text-align: center; margin-right: 10px;">👤</div>
+        <div>User Preferences</div>
+      </div>
+      <div>›</div>
+    </div>
+    <div style="display: flex; justify-content: space-between; padding: 12px; border-bottom: 1px solid #eee;">
+      <div style="display: flex; align-items: center;">
+        <div style="width: 24px; text-align: center; margin-right: 10px;">⚙️</div>
+        <div>App Settings</div>
+      </div>
+      <div>›</div>
+    </div>
+    <div style="display: flex; justify-content: space-between; padding: 12px;">
+      <div style="display: flex; align-items: center;">
+        <div style="width: 24px; text-align: center; margin-right: 10px;">🔔</div>
+        <div>Notifications</div>
+      </div>
+      <div>›</div>
+    </div>
+  </div>
+</div>
+
+<!-- Gamification Screen -->
+<div class="wireframe">
+  <div class="wireframe-title">Gamification Screen</div>
+  <div class="status-bar">
+    <span>9:41 AM</span>
+    <span>100%</span>
+  </div>
+
+  <div class="nav-bar">
+    <div class="back-button">&lt;</div>
+    <div class="screen-title">Achievements</div>
+    <div style="width: 30px;"></div>
+  </div>
+
+  <!-- XP Progress Section -->
+  <div class="section-title">Your Progress</div>
+  <div class="card" style="padding: 16px; margin-bottom: 15px;">
+    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+      <div style="font-weight: bold;">Level 7</div>
+      <div>2,450 XP</div>
+    </div>
+    <div style="height: 12px; background-color: #eee; border-radius: 6px; overflow: hidden; margin-bottom: 8px;">
+      <div style="height: 100%; width: 65%; background-color: #9C27B0;"></div>
+    </div>
+    <div style="text-align: right; font-size: 12px; color: #666;">235 XP to Level 8</div>
+  </div>
+
+  <!-- Badges Section -->
+  <div class="section-title">Achievements & Badges</div>
+  <div class="card" style="margin-bottom: 15px;">
+    <div style="display: flex; padding: 12px; border-bottom: 1px solid #eee;">
+      <div style="width: 40px; height: 40px; background-color: #9C27B0; border-radius: 20px; display: flex; justify-content: center; align-items: center; margin-right: 12px; color: white;">
+        ★
+      </div>
+      <div>
+        <div style="font-weight: bold;">Consistency Champion</div>
+        <div style="font-size: 12px; color: #666;">Complete 3 workouts in a week</div>
+      </div>
+    </div>
+    <div style="display: flex; padding: 12px; border-bottom: 1px solid #eee;">
+      <div style="width: 40px; height: 40px; background-color: #FF9800; border-radius: 20px; display: flex; justify-content: center; align-items: center; margin-right: 12px; color: white;">
+        🏆
+      </div>
+      <div>
+        <div style="font-weight: bold;">Strength Master</div>
+        <div style="font-size: 12px; color: #666;">Lift over 5,000kg in a single session</div>
+      </div>
+    </div>
+    <div style="display: flex; padding: 12px;">
+      <div style="width: 40px; height: 40px; background-color: #F44336; border-radius: 20px; display: flex; justify-content: center; align-items: center; margin-right: 12px; color: white;">
+        🔥
+      </div>
+      <div>
+        <div style="font-weight: bold;">30-Day Streak</div>
+        <div style="font-size: 12px; color: #666;">Use the app for 30 consecutive days</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+      
+      <!-- Screen 1: Main Dashboard with Tabs and Calories -->
+<div class="wireframe screen">
+  <div class="status-bar">
+    <span>9:41 AM</span>
+    <span>100%</span>
+  </div>
+
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+    <div style="font-size: 24px; font-weight: bold;">Stats Dashboard</div>
+    <div style="width: 40px; height: 40px; background-color: #444; border-radius: 20px;"></div>
+  </div>
+
+  <div style="display: flex; margin-bottom: 15px;">
+    <div style="flex: 1; padding: 5px;">
+      <div style="text-align: center; font-size: 12px; color: #999; padding: 5px;">Daily</div>
+      <div style="height: 3px; background-color: #9C27B0;"></div>
+    </div>
+    <div style="flex: 1; padding: 5px;">
+      <div style="text-align: center; font-size: 12px; color: #999; padding: 5px;">Weekly</div>
+      <div style="height: 3px; background-color: transparent;"></div>
+    </div>
+    <div style="flex: 1; padding: 5px;">
+      <div style="text-align: center; font-size: 12px; color: #999; padding: 5px;">Monthly</div>
+      <div style="height: 3px; background-color: transparent;"></div>
+    </div>
+    <div style="flex: 1; padding: 5px;">
+      <div style="text-align: center; font-size: 12px; color: #999; padding: 5px;">Yearly</div>
+      <div style="height: 3px; background-color: transparent;"></div>
+    </div>
+  </div>
+
+  <!-- Bar Chart for Calories -->
+  <div class="section-title">Calories Burned</div>
+  <div class="card" style="padding: 15px; margin-bottom: 20px;">
+    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+      <div style="font-size: 18px; font-weight: bold;">456</div>
+      <div style="color: #9C27B0; font-size: 12px;">+23% vs last week</div>
+    </div>
+    <div style="height: 150px; display: flex; align-items: flex-end; justify-content: space-between; margin-top: 15px; padding-bottom: 25px; position: relative;">
+      <!-- Bar Chart Background Grid Lines -->
+      <div style="position: absolute; left: 0; right: 0; bottom: 25px; height: 1px; background-color: #333;"></div>
+      <div style="position: absolute; left: 0; right: 0; bottom: 50px; height: 1px; background-color: #333;"></div>
+      <div style="position: absolute; left: 0; right: 0; bottom: 75px; height: 1px; background-color: #333;"></div>
+      <div style="position: absolute; left: 0; right: 0; bottom: 100px; height: 1px; background-color: #333;"></div>
+      <div style="position: absolute; left: 0; right: 0; bottom: 125px; height: 1px; background-color: #333;"></div>
+      
+      <!-- Bars -->
+      <div style="flex: 1; margin: 0 3px; display: flex; flex-direction: column; align-items: center;">
+        <div style="width: 80%; background-color: #9C27B0; height: 75px;"></div>
+        <div style="margin-top: 10px; font-size: 10px; color: #999;">Mon</div>
+      </div>
+      <div style="flex: 1; margin: 0 3px; display: flex; flex-direction: column; align-items: center;">
+        <div style="width: 80%; background-color: #9C27B0; height: 110px;"></div>
+        <div style="margin-top: 10px; font-size: 10px; color: #999;">Tue</div>
+      </div>
+      <div style="flex: 1; margin: 0 3px; display: flex; flex-direction: column; align-items: center;">
+        <div style="width: 80%; background-color: #9C27B0; height: 60px;"></div>
+        <div style="margin-top: 10px; font-size: 10px; color: #999;">Wed</div>
+      </div>
+      <div style="flex: 1; margin: 0 3px; display: flex; flex-direction: column; align-items: center;">
+        <div style="width: 80%; background-color: #9C27B0; height: 95px;"></div>
+        <div style="margin-top: 10px; font-size: 10px; color: #999;">Thu</div>
+      </div>
+      <div style="flex: 1; margin: 0 3px; display: flex; flex-direction: column; align-items: center;">
+        <div style="width: 80%; background-color: #9C27B0; height: 120px;"></div>
+        <div style="margin-top: 10px; font-size: 10px; color: #999;">Fri</div>
+      </div>
+      <div style="flex: 1; margin: 0 3px; display: flex; flex-direction: column; align-items: center;">
+        <div style="width: 80%; background-color: rgba(156, 39, 176, 0.3); height: 40px;"></div>
+        <div style="margin-top: 10px; font-size: 10px; color: #999;">Sat</div>
+      </div>
+      <div style="flex: 1; margin: 0 3px; display: flex; flex-direction: column; align-items: center;">
+        <div style="width: 80%; background-color: rgba(156, 39, 176, 0.3); height: 25px;"></div>
+        <div style="margin-top: 10px; font-size: 10px; color: #999;">Sun</div>
+      </div>
+    </div>
+    <div style="display: flex; justify-content: space-between; padding-top: 5px; border-top: 1px solid #333;">
+      <div style="font-size: 12px; color: #999;">Goal: 500 cal/day</div>
+      <div style="font-size: 12px; color: #9C27B0;">View Details</div>
+    </div>
+  </div>
+
+
+<!-- Screen 2: Step Count -->
+<div class="wireframe screen">
+  <div class="status-bar">
+    <span>9:41 AM</span>
+    <span>100%</span>
+  </div>
+
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+    <div style="font-size: 24px; font-weight: bold;">Stats Dashboard</div>
+    <div style="width: 40px; height: 40px; background-color: #444; border-radius: 20px;"></div>
+  </div>
+
+  <!-- Step Count Bar Chart -->
+  <div class="section-title">Step Count</div>
+  <div class="card" style="padding: 15px; margin-bottom: 20px;">
+    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+      <div style="font-size: 18px; font-weight: bold;">8,245</div>
+      <div style="color: #9C27B0; font-size: 12px;">+12% vs last week</div>
+    </div>
+    <div style="height: 150px; display: flex; align-items: flex-end; justify-content: space-between; margin-top: 15px; padding-bottom: 25px; position: relative;">
+      <!-- Bar Chart Background Grid Lines -->
+      <div style="position: absolute; left: 0; right: 0; bottom: 25px; height: 1px; background-color: #333;"></div>
+      <div style="position: absolute; left: 0; right: 0; bottom: 50px; height: 1px; background-color: #333;"></div>
+      <div style="position: absolute; left: 0; right: 0; bottom: 75px; height: 1px; background-color: #333;"></div>
+      <div style="position: absolute; left: 0; right: 0; bottom: 100px; height: 1px; background-color: #333;"></div>
+      <div style="position: absolute; left: 0; right: 0; bottom: 125px; height: 1px; background-color: #333;"></div>
+      
+      <!-- Bars -->
+      <div style="flex: 1; margin: 0 3px; display: flex; flex-direction: column; align-items: center;">
+        <div style="width: 80%; background-color: #2196F3; height: 65px;"></div>
+        <div style="margin-top: 10px; font-size: 10px; color: #999;">Mon</div>
+      </div>
+      <div style="flex: 1; margin: 0 3px; display: flex; flex-direction: column; align-items: center;">
+        <div style="width: 80%; background-color: #2196F3; height: 90px;"></div>
+        <div style="margin-top: 10px; font-size: 10px; color: #999;">Tue</div>
+      </div>
+      <div style="flex: 1; margin: 0 3px; display: flex; flex-direction: column; align-items: center;">
+        <div style="width: 80%; background-color: #2196F3; height: 105px;"></div>
+        <div style="margin-top: 10px; font-size: 10px; color: #999;">Wed</div>
+      </div>
+      <div style="flex: 1; margin: 0 3px; display: flex; flex-direction: column; align-items: center;">
+        <div style="width: 80%; background-color: #2196F3; height: 75px;"></div>
+        <div style="margin-top: 10px; font-size: 10px; color: #999;">Thu</div>
+      </div>
+      <div style="flex: 1; margin: 0 3px; display: flex; flex-direction: column; align-items: center;">
+        <div style="width: 80%; background-color: #2196F3; height: 120px;"></div>
+        <div style="margin-top: 10px; font-size: 10px; color: #999;">Fri</div>
+      </div>
+      <div style="flex: 1; margin: 0 3px; display: flex; flex-direction: column; align-items: center;">
+        <div style="width: 80%; background-color: rgba(33, 150, 243, 0.3); height: 80px;"></div>
+        <div style="margin-top: 10px; font-size: 10px; color: #999;">Sat</div>
+      </div>
+      <div style="flex: 1; margin: 0 3px; display: flex; flex-direction: column; align-items: center;">
+        <div style="width: 80%; background-color: rgba(33, 150, 243, 0.3); height: 45px;"></div>
+        <div style="margin-top: 10px; font-size: 10px; color: #999;">Sun</div>
+      </div>
+    </div>
+    <div style="display: flex; justify-content: space-between; padding-top: 5px; border-top: 1px solid #333;">
+      <div style="font-size: 12px; color: #999;">Goal: 10,000 steps/day</div>
+      <div style="font-size: 12px; color: #2196F3;">View Details</div>
+    </div>
+  </div>
+
+<!-- Screen 3: Strength Progress -->
+<div class="wireframe screen">
+  <div class="status-bar">
+    <span>9:41 AM</span>
+    <span>100%</span>
+  </div>
+
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+    <div style="font-size: 24px; font-weight: bold;">Stats Dashboard</div>
+    <div style="width: 40px; height: 40px; background-color: #444; border-radius: 20px;"></div>
+  </div>
+
+  <!-- Line Chart for Lifts -->
+  <div class="section-title">Strength Progress</div>
+  <div class="card" style="padding: 15px; margin-bottom: 20px;">
+    <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+      <div>
+        <div style="font-size: 16px; font-weight: bold;">Bench Press</div>
+        <div style="font-size: 12px; color: #999;">Max Weight (lbs)</div>
+      </div>
+      <div style="display: flex; align-items: center;">
+        <div style="width: 10px; height: 10px; background-color: #FF5722; border-radius: 5px; margin-right: 5px;"></div>
+        <div style="font-size: 12px; color: #999;">Current</div>
+      </div>
+    </div>
+    
+    <div style="height: 150px; position: relative; margin-bottom: 15px;">
+      <!-- Line Chart Grid Lines -->
+      <div style="position: absolute; left: 30px; right: 0; top: 0; height: 1px; background-color: #333;"></div>
+      <div style="position: absolute; left: 30px; right: 0; top: 30px; height: 1px; background-color: #333;"></div>
+      <div style="position: absolute; left: 30px; right: 0; top: 60px; height: 1px; background-color: #333;"></div>
+      <div style="position: absolute; left: 30px; right: 0; top: 90px; height: 1px; background-color: #333;"></div>
+      <div style="position: absolute; left: 30px; right: 0; top: 120px; height: 1px; background-color: #333;"></div>
+      <div style="position: absolute; left: 30px; right: 0; top: 150px; height: 1px; background-color: #333;"></div>
+      
+      <!-- Y-axis Labels -->
+      <div style="position: absolute; left: 0; top: -5px; font-size: 10px; color: #999;">200</div>
+      <div style="position: absolute; left: 0; top: 55px; font-size: 10px; color: #999;">150</div>
+      <div style="position: absolute; left: 0; top: 115px; font-size: 10px; color: #999;">100</div>
+      
+      <!-- Line Chart -->
+      <svg style="position: absolute; left: 30px; right: 0; top: 0; height: 150px; width: calc(100% - 30px);">
+        <polyline points="0,120 40,110 80,100 120,90 160,70 200,60 240,40" 
+                 style="fill:none; stroke:#FF5722; stroke-width:2;" />
+        
+        <!-- Data Points -->
+        <circle cx="0" cy="120" r="4" fill="#FF5722" />
+        <circle cx="40" cy="110" r="4" fill="#FF5722" />
+        <circle cx="80" cy="100" r="4" fill="#FF5722" />
+        <circle cx="120" cy="90" r="4" fill="#FF5722" />
+        <circle cx="160" cy="70" r="4" fill="#FF5722" />
+        <circle cx="200" cy="60" r="4" fill="#FF5722" />
+        <circle cx="240" cy="40" r="4" fill="#FF5722" />
+      </svg>
+      
+      <!-- X-axis Labels -->
+      <div style="position: absolute; left: 30px; bottom: -25px; right: 0; display: flex; justify-content: space-between;">
+        <div style="font-size: 10px; color: #999;">Jan</div>
+        <div style="font-size: 10px; color: #999;">Feb</div>
+        <div style="font-size: 10px; color: #999;">Mar</div>
+        <div style="font-size: 10px; color: #999;">Apr</div>
+        <div style="font-size: 10px; color: #999;">May</div>
+        <div style="font-size: 10px; color: #999;">Jun</div>
+        <div style="font-size: 10px; color: #999;">Jul</div>
+      </div>
+    </div>
+    
+    <div style="display: flex; justify-content: space-between; border-top: 1px solid #333; padding-top: 10px;">
+      <div style="display: flex;">
+        <div style="margin-right: 15px;">
+          <div style="font-size: 10px; color: #999;">Starting</div>
+          <div style="font-size: 14px; font-weight: bold;">100 lbs</div>
+        </div>
+        <div>
+          <div style="font-size: 10px; color: #999;">Current</div>
+          <div style="font-size: 14px; font-weight: bold;">185 lbs</div>
+        </div>
+      </div>
+      <div style="font-size: 12px; color: #FF5722; align-self: flex-end;">Change Exercise</div>
+    </div>
+  </div>
+
+
+<!-- Screen 4: Workout Consistency -->
+<div class="wireframe screen">
+  <div class="status-bar">
+    <span>9:41 AM</span>
+    <span>100%</span>
+  </div>
+
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+    <div style="font-size: 24px; font-weight: bold;">Stats Dashboard</div>
+    <div style="width: 40px; height: 40px; background-color: #444; border-radius: 20px;"></div>
+  </div>
+
+  <!-- Calendar Heatmap -->
+  <div class="section-title">Workout Consistency</div>
+  <div class="card" style="padding: 15px; margin-bottom: 20px;">
+    <div style="margin-bottom: 15px; display: flex; justify-content: space-between;">
+      <div style="font-size: 16px; font-weight: bold;">July 2025</div>
+      <div style="font-size: 12px; color: #9C27B0;">View Full Year</div>
+    </div>
+    
+    <!-- Calendar Header -->
+    <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; margin-bottom: 5px;">
+      <div style="text-align: center; font-size: 10px; color: #999;">S</div>
+      <div style="text-align: center; font-size: 10px; color: #999;">M</div>
+      <div style="text-align: center; font-size: 10px; color: #999;">T</div>
+      <div style="text-align: center; font-size: 10px; color: #999;">W</div>
+      <div style="text-align: center; font-size: 10px; color: #999;">T</div>
+      <div style="text-align: center; font-size: 10px; color: #999;">F</div>
+      <div style="text-align: center; font-size: 10px; color: #999;">S</div>
+    </div>
+    
+    <!-- Calendar Grid - Week 1 -->
+    <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; margin-bottom: 5px;">
+      <div style="width: 100%; aspect-ratio: 1/1; background-color: #333; border-radius: 4px; display: flex; justify-content: center; align-items: center; font-size: 10px; color: #999;">30</div>
+      <div style="width: 100%; aspect-ratio: 1/1; background-color: rgba(76, 175, 80, 0.8); border-radius: 4px; display: flex; justify-content: center; align-items: center; font-size: 10px; color: #fff;">1</div>
+      <div style="width: 100%; aspect-ratio: 1/1; background-color: rgba(76, 175, 80, 0.3); border-radius: 4px; display: flex; justify-content: center; align-items: center; font-size: 10px; color: #fff;">2</div>
+      <div style="width: 100%; aspect-ratio: 1/1; background-color: rgba(76, 175, 80, 0.6); border-radius: 4px; display: flex; justify-content: center; align-items: center; font-size: 10px; color: #fff;">3</div>
+      <div style="width: 100%; aspect-ratio: 1/1; background-color: #333; border-radius: 4px; display: flex; justify-content: center; align-items: center; font-size: 10px; color: #999;">4</div>
+      <div style="width: 100%; aspect-ratio: 1/1; background-color: rgba(76, 175, 80, 0.8); border-radius: 4px; display: flex; justify-content: center; align-items: center; font-size: 10px; color: #fff;">5</div>
+      <div style="width: 100%; aspect-ratio: 1/1; background-color: #333; border-radius: 4px; display: flex; justify-content: center; align-items: center; font-size: 10px; color: #999;">6</div>
+    </div>
+    
+    <!-- Calendar Grid - Week 2 -->
+    <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; margin-bottom: 5px;">
+      <div style="width: 100%; aspect-ratio: 1/1; background-color: #333; border-radius: 4px; display: flex; justify-content: center; align-items: center; font-size: 10px; color: #999;">7</div>
+      <div style="width: 100%; aspect-ratio: 1/1; background-color: rgba(76, 175, 80, 0.8); border-radius: 4px; display: flex; justify-content: center; align-items: center; font-size: 10px; color: #fff;">8</div>
+      <div style="width: 100%; aspect-ratio: 1/1; background-color: rgba(76, 175, 80, 0.3); border-radius: 4px; display: flex; justify-content: center; align-items: center; font-size: 10px; color: #fff;">9</div>
+      <div style="width: 100%; aspect-ratio: 1/1; background-color: rgba(76, 175, 80, 0.6); border-radius: 4px; display: flex; justify-content: center; align-items: center; font-size: 10px; color: #fff;">10</div>
+      <div style="width: 100%; aspect-ratio: 1/1; background-color: rgba(76, 175, 80, 0.8); border-radius: 4px; display: flex; justify-content: center; align-items: center; font-size: 10px; color: #fff;">11</div>
+      <div style="width: 100%; aspect-ratio: 1/1; background-color: #333; border-radius: 4px; display: flex; justify-content: center; align-items: center; font-size: 10px; color: #999;">12</div>
+      <div style="width: 100%; aspect-ratio: 1/1; background-color: #333; border-radius: 4px; display: flex; justify-content: center; align-items: center; font-size: 10px; color: #999;">13</div>
+    </div>
+    
+    <!-- Legend -->
+    <div style="display: flex; justify-content: center; gap: 15px; margin-top: 15px;">
+      <div style="display: flex; align-items: center;">
+        <div style="width: 10px; height: 10px; background-color: #333; border-radius: 2px; margin-right: 5px;"></div>
+        <div style="font-size: 10px; color: #999;">No Activity</div>
+      </div>
+      <div style="display: flex; align-items: center;">
+        <div style="width: 10px; height: 10px; background-color: rgba(76, 175, 80, 0.3); border-radius: 2px; margin-right: 5px;"></div>
+        <div style="font-size: 10px; color: #999;">Light</div>
+      </div>
+      <div style="display: flex; align-items: center;">
+        <div style="width: 10px; height: 10px; background-color: rgba(76, 175, 80, 0.6); border-radius: 2px; margin-right: 5px;"></div>
+        <div style="font-size: 10px; color: #999;">Medium</div>
+      </div>
+      <div style="display: flex; align-items: center;">
+        <div style="width: 10px; height: 10px; background-color: rgba(76, 175, 80, 0.8); border-radius: 2px; margin-right: 5px;"></div>
+        <div style="font-size: 10px; color: #999;">Intense</div>
+      </div>
+    </div>
+
+    <div class="section-title">Exercise Summary</div>
+    <div class="card" style="padding: 0; overflow: hidden; margin-bottom: 20px;">
+      <div style="padding: 15px; display: flex; justify-content: space-between; border-bottom: 1px solid #333;">
+        <div style="font-weight: bold;">Exercise</div>
+        <div style="font-weight: bold;">Progress</div>
+      </div>
+      
+      <div style="display: flex; align-items: center; padding: 15px; border-bottom: 1px solid #333;">
+        <div style="width: 40px; height: 40px; background-color: #444; border-radius: 8px; display: flex; justify-content: center; align-items: center; margin-right: 15px;">
+          🏋️
+        </div>
+        <div style="flex-grow: 1;">
+          <div style="font-weight: bold;">Bench Press</div>
+          <div style="color: #999; font-size: 12px;">Max: 185 lbs (+25 lbs)</div>
+  </div>
+
+
+    </div>
+  </body>
+</html>

@@ -124,7 +124,7 @@ nav {
     padding: 8px;
     transition: all 0.25s ease;
   }
-  
+
   /* Improved navigation panel with smoother animation */
   .nav-links {
     position: fixed;
@@ -138,25 +138,25 @@ nav {
     -webkit-backdrop-filter: blur(15px);
     flex-direction: column;
     padding: 90px 32px 40px;
-    
+
     /* Smoother animation */
     transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
     transform: translateX(10px);
     opacity: 0;
-    
+
     box-shadow: -8px 0 35px rgba(0, 0, 0, 0.25);
     z-index: 99;
     gap: 22px;
     border-left: 1px solid rgba(140, 82, 255, 0.15);
   }
-  
+
   /* Enhanced active state animation */
   .nav-links.active {
     right: 0;
     transform: translateX(0);
     opacity: 1;
   }
-  
+
   /* Staggered animation for nav items */
   .nav-links a {
     font-size: 17px;
@@ -172,30 +172,30 @@ nav {
     animation: fadeInRight 0.4s forwards;
     animation-delay: calc(0.1s * var(--item-index, 0));
   }
-  
+
   @keyframes fadeInRight {
     to {
       opacity: 1;
       transform: translateX(0);
     }
   }
-  
+
   .nav-links a:hover {
     padding-left: 12px;
     color: rgba(140, 82, 255, 1);
     border-bottom: 1px solid rgba(140, 82, 255, 0.5);
   }
-  
+
   .logo img {
     width: 38px;
     height: 38px;
     transition: transform 0.3s ease;
   }
-  
+
   .logo img:hover {
     transform: scale(1.08);
   }
-  
+
   /* Enhanced contact button */
   .contact-btn {
     margin: 24px 0 0;
@@ -214,19 +214,19 @@ nav {
     animation: fadeInUp 0.5s forwards;
     animation-delay: 0.4s;
   }
-  
+
   @keyframes fadeInUp {
     to {
       opacity: 1;
       transform: translateY(0);
     }
   }
-  
+
   .contact-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(140, 82, 255, 0.4);
   }
-  
+
   /* Optional overlay for better focus on menu */
   .menu-overlay {
     position: fixed;
@@ -242,7 +242,7 @@ nav {
     transition: all 0.4s ease;
     z-index: 98;
   }
-  
+
   .menu-overlay.active {
     opacity: 1;
     visibility: visible;
